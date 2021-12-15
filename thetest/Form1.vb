@@ -119,34 +119,54 @@
         Return -1
     End Function
 
+    Private Function GetStrFromDescription(desc As String) As String
+        For Each str As String In mListOriginalString
+            If str.IndexOf(desc) > 0 Then
+                Return str
+            End If
+        Next
+        Return ""
+    End Function
+
+
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         If ComboBox1.SelectedItem IsNot Nothing Then
             Dim id As Integer = GetIDFromDescription(ComboBox1.SelectedItem)
             If id <> -1 Then
                 Label_CodeID.Text = "コードID:" & id
-                Dim str As String = mListOriginalString.Item(id)
+                Dim str As String = GetStrFromDescription(ComboBox1.SelectedItem)
                 Dim strarray As String() = str.Split(",")
                 Dim description = strarray.GetValue(1)
                 Dim tmplist As List(Of String) = New List(Of String)
-                Dim i As Integer = 0
+                Dim i As Integer = -1
                 Dim valuecount As Integer = 0
                 For Each tmpstr As String In strarray
+                    i = i + 1
                     If i = 0 Or i = 1 Then
                         Continue For
                     End If
                     If i = 2 Then
-                        valuecount = Integer.Parse(tmpstr)
+                        Try
+                            valuecount = Integer.Parse(tmpstr)
+                        Catch err As FormatException
+
+
+                        End Try
                     End If
+                    tmplist.Add(tmpstr)
                 Next
-                For i = 0 To valuecount
-                    Dim opcode As Integer = Integer.Parse(tmplist(i))
-                    Select Case opcode
-                        Case 0
-                            TabControl2.SelectedTab = TabPage_Int
-                    End Select
+                'Dim opcode As Integer = Integer.Parse(tmplist(i))
+                Select Case tmplist(2)
+                    Case "0"
+                        TabControl2.SelectedTab = TabPage_Int
+                    Case "P"
+                        TabControl2.SelectedTab = TabPage_Int
+                    Case "J"
+                        TabControl2.SelectedTab = TabPage_Jump
+                    Case "L"
+                        TabControl2.SelectedTab = TabPage_Label
 
-
-                Next
+                End Select
             End If
         End If
     End Sub
