@@ -1,5 +1,6 @@
 ﻿Public Class Form1
     Dim mSettingsDict As Dictionary(Of String, Int32)
+    Dim mIntLabelControls As Label()
 
     Shared Sub Main()
         If Diagnostics.Process.GetProcessesByName(Diagnostics.Process.GetCurrentProcess.ProcessName).Length > 1 Then
@@ -22,6 +23,7 @@
             '            TB_ML_Settings.Text = str
             sr.Close()
         End If
+        mIntLabelControls = New Label() {Label_detail1, Label_detail2, Label_detail3, Label_detail4}
     End Sub
 
     Private Sub 設定ToolStripMenuItem1_Click(sender As Object, e As EventArgs)
@@ -156,9 +158,14 @@
                     tmplist.Add(tmpstr)
                 Next
                 'Dim opcode As Integer = Integer.Parse(tmplist(i))
+                Dim counter As Integer
                 Select Case tmplist(2)
                     Case "0"
                         TabControl2.SelectedTab = TabPage_Int
+                        For counter = 0 To valuecount
+                            mIntLabelControls(counter).Text = tmplist(3 + 3 * counter)
+                            counter = counter + 1
+                        Next
                     Case "P"
                         TabControl2.SelectedTab = TabPage_Int
                     Case "J"
@@ -171,4 +178,56 @@
         End If
     End Sub
 
+    Private Sub Button_SetInt_Click(sender As Object, e As EventArgs) Handles Button_SetInt.Click
+        Dim tmpstr As String = ComboBox1.SelectedItem
+        Dim textboxarray As TextBox() = New TextBox() {TextBox_Int1, TextBox_Int2, TextBox_Int3, TextBox_Int4}
+        Dim i As Integer
+        For i = 0 To 3
+            If mIntLabelControls(i).Text.Length > 0 And String.IsNullOrWhiteSpace(textboxarray(i).Text) = True Then
+                MessageBox.Show(i + 1 & "番の入力が不足しています")
+                Return
+            Else
+                '詳細のある項目だけデータとして扱う。詳細なし項目のデータは無視
+                If mIntLabelControls(i).Text.Length > 0 Then
+                    tmpstr = tmpstr & "," & textboxarray(i).Text
+                End If
+            End If
+        Next
+        TextBox_OrderList.AppendText(tmpstr)
+    End Sub
+
+    Private Sub Button_ClearInt_Click(sender As Object, e As EventArgs) Handles Button_ClearInt.Click
+        Dim textboxarray As TextBox() = New TextBox() {TextBox_Int1, TextBox_Int2, TextBox_Int3, TextBox_Int4}
+        For i = 0 To 3
+            textboxarray(i).Clear()
+        Next
+    End Sub
+
+    Private Sub Button_SetCompare_Click(sender As Object, e As EventArgs) Handles Button_SetCompare.Click
+
+    End Sub
+
+    Private Sub Button_ClearCompare_Click(sender As Object, e As EventArgs) Handles Button_ClearCompare.Click
+
+    End Sub
+
+    Private Sub Button_SetJump_Click(sender As Object, e As EventArgs) Handles Button_SetJump.Click
+
+    End Sub
+
+    Private Sub Button_ClearJump_Click(sender As Object, e As EventArgs) Handles Button_ClearJump.Click
+
+    End Sub
+
+    Private Sub Button_SetLabelname_Click(sender As Object, e As EventArgs) Handles Button_SetLabelname.Click
+
+    End Sub
+
+    Private Sub Button_ClearLabelname_Click(sender As Object, e As EventArgs) Handles Button_ClearLabelname.Click
+
+    End Sub
+
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+
+    End Sub
 End Class
