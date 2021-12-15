@@ -26,28 +26,21 @@ Partial Class Form1
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TextBox13 = New System.Windows.Forms.TextBox()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPage_Int = New System.Windows.Forms.TabPage()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Button_ClearInt = New System.Windows.Forms.Button()
+        Me.Button_SetInt = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox_Int4 = New System.Windows.Forms.TextBox()
+        Me.TextBox_Int3 = New System.Windows.Forms.TextBox()
+        Me.TextBox_Int2 = New System.Windows.Forms.TextBox()
+        Me.TextBox_Int1 = New System.Windows.Forms.TextBox()
         Me.TabPage_Compare = New System.Windows.Forms.TabPage()
+        Me.Button_ClearCompare = New System.Windows.Forms.Button()
+        Me.Button_SetCompare = New System.Windows.Forms.Button()
         Me.RadioButton6 = New System.Windows.Forms.RadioButton()
         Me.RadioButton5 = New System.Windows.Forms.RadioButton()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -61,13 +54,17 @@ Partial Class Form1
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.TabPage_Jump = New System.Windows.Forms.TabPage()
+        Me.Button_ClearJump = New System.Windows.Forms.Button()
+        Me.Button_SetJump = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.TabPage_Label = New System.Windows.Forms.TabPage()
         Me.Label18 = New System.Windows.Forms.Label()
+        Me.Button_ClearLabelname = New System.Windows.Forms.Button()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
+        Me.Button_SetLabelname = New System.Windows.Forms.Button()
         Me.TextBox12 = New System.Windows.Forms.TextBox()
         Me.Label_CodeID = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -85,6 +82,10 @@ Partial Class Form1
         Me.TB_OutputDirectory = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Label_detail1 = New System.Windows.Forms.Label()
+        Me.Label_detail2 = New System.Windows.Forms.Label()
+        Me.Label_detail3 = New System.Windows.Forms.Label()
+        Me.Label_detail4 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabControl2.SuspendLayout()
@@ -121,9 +122,6 @@ Partial Class Form1
         'TabPage2
         '
         Me.TabPage2.Controls.Add(Me.TextBox13)
-        Me.TabPage2.Controls.Add(Me.Button5)
-        Me.TabPage2.Controls.Add(Me.Button4)
-        Me.TabPage2.Controls.Add(Me.Button3)
         Me.TabPage2.Controls.Add(Me.TabControl2)
         Me.TabPage2.Controls.Add(Me.Label_CodeID)
         Me.TabPage2.Controls.Add(Me.Label4)
@@ -145,33 +143,6 @@ Partial Class Form1
         Me.TextBox13.Size = New System.Drawing.Size(591, 19)
         Me.TextBox13.TabIndex = 17
         '
-        'Button5
-        '
-        Me.Button5.Location = New System.Drawing.Point(8, 398)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(151, 49)
-        Me.Button5.TabIndex = 16
-        Me.Button5.Text = "命令のクリア"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(438, 398)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(107, 48)
-        Me.Button4.TabIndex = 15
-        Me.Button4.Text = "命令削除"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(191, 398)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(217, 49)
-        Me.Button3.TabIndex = 14
-        Me.Button3.Text = "命令をセットする"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'TabControl2
         '
         Me.TabControl2.Controls.Add(Me.TabPage_Int)
@@ -186,22 +157,20 @@ Partial Class Form1
         '
         'TabPage_Int
         '
-        Me.TabPage_Int.Controls.Add(Me.Label13)
-        Me.TabPage_Int.Controls.Add(Me.Label12)
-        Me.TabPage_Int.Controls.Add(Me.Label11)
-        Me.TabPage_Int.Controls.Add(Me.Label10)
+        Me.TabPage_Int.Controls.Add(Me.Label_detail4)
+        Me.TabPage_Int.Controls.Add(Me.Label_detail3)
+        Me.TabPage_Int.Controls.Add(Me.Label_detail2)
+        Me.TabPage_Int.Controls.Add(Me.Label_detail1)
+        Me.TabPage_Int.Controls.Add(Me.Button_ClearInt)
+        Me.TabPage_Int.Controls.Add(Me.Button_SetInt)
         Me.TabPage_Int.Controls.Add(Me.Label9)
         Me.TabPage_Int.Controls.Add(Me.Label8)
         Me.TabPage_Int.Controls.Add(Me.Label7)
         Me.TabPage_Int.Controls.Add(Me.Label5)
-        Me.TabPage_Int.Controls.Add(Me.TextBox9)
-        Me.TabPage_Int.Controls.Add(Me.TextBox8)
-        Me.TabPage_Int.Controls.Add(Me.TextBox7)
-        Me.TabPage_Int.Controls.Add(Me.TextBox6)
-        Me.TabPage_Int.Controls.Add(Me.TextBox5)
-        Me.TabPage_Int.Controls.Add(Me.TextBox4)
-        Me.TabPage_Int.Controls.Add(Me.TextBox3)
-        Me.TabPage_Int.Controls.Add(Me.TextBox2)
+        Me.TabPage_Int.Controls.Add(Me.TextBox_Int4)
+        Me.TabPage_Int.Controls.Add(Me.TextBox_Int3)
+        Me.TabPage_Int.Controls.Add(Me.TextBox_Int2)
+        Me.TabPage_Int.Controls.Add(Me.TextBox_Int1)
         Me.TabPage_Int.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_Int.Name = "TabPage_Int"
         Me.TabPage_Int.Padding = New System.Windows.Forms.Padding(3)
@@ -210,46 +179,28 @@ Partial Class Form1
         Me.TabPage_Int.Text = "intのみ"
         Me.TabPage_Int.UseVisualStyleBackColor = True
         '
-        'Label13
+        'Button_ClearInt
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(397, 68)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(11, 12)
-        Me.Label13.TabIndex = 15
-        Me.Label13.Text = "8"
+        Me.Button_ClearInt.Location = New System.Drawing.Point(3, 235)
+        Me.Button_ClearInt.Name = "Button_ClearInt"
+        Me.Button_ClearInt.Size = New System.Drawing.Size(151, 49)
+        Me.Button_ClearInt.TabIndex = 18
+        Me.Button_ClearInt.Text = "命令のクリア"
+        Me.Button_ClearInt.UseVisualStyleBackColor = True
         '
-        'Label12
+        'Button_SetInt
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(262, 68)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(11, 12)
-        Me.Label12.TabIndex = 14
-        Me.Label12.Text = "7"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(135, 68)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(11, 12)
-        Me.Label11.TabIndex = 13
-        Me.Label11.Text = "6"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(6, 68)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(11, 12)
-        Me.Label10.TabIndex = 12
-        Me.Label10.Text = "5"
+        Me.Button_SetInt.Location = New System.Drawing.Point(367, 238)
+        Me.Button_SetInt.Name = "Button_SetInt"
+        Me.Button_SetInt.Size = New System.Drawing.Size(217, 49)
+        Me.Button_SetInt.TabIndex = 16
+        Me.Button_SetInt.Text = "命令をセットする"
+        Me.Button_SetInt.UseVisualStyleBackColor = True
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(397, 18)
+        Me.Label9.Location = New System.Drawing.Point(6, 115)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(11, 12)
         Me.Label9.TabIndex = 11
@@ -258,7 +209,7 @@ Partial Class Form1
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(262, 18)
+        Me.Label8.Location = New System.Drawing.Point(6, 83)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(11, 12)
         Me.Label8.TabIndex = 10
@@ -267,7 +218,7 @@ Partial Class Form1
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(135, 18)
+        Me.Label7.Location = New System.Drawing.Point(6, 51)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(11, 12)
         Me.Label7.TabIndex = 9
@@ -282,64 +233,38 @@ Partial Class Form1
         Me.Label5.TabIndex = 8
         Me.Label5.Text = "1"
         '
-        'TextBox9
+        'TextBox_Int4
         '
-        Me.TextBox9.Location = New System.Drawing.Point(399, 83)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(100, 19)
-        Me.TextBox9.TabIndex = 7
+        Me.TextBox_Int4.Location = New System.Drawing.Point(31, 112)
+        Me.TextBox_Int4.Name = "TextBox_Int4"
+        Me.TextBox_Int4.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox_Int4.TabIndex = 3
         '
-        'TextBox8
+        'TextBox_Int3
         '
-        Me.TextBox8.Location = New System.Drawing.Point(264, 83)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(100, 19)
-        Me.TextBox8.TabIndex = 6
+        Me.TextBox_Int3.Location = New System.Drawing.Point(31, 80)
+        Me.TextBox_Int3.Name = "TextBox_Int3"
+        Me.TextBox_Int3.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox_Int3.TabIndex = 2
         '
-        'TextBox7
+        'TextBox_Int2
         '
-        Me.TextBox7.Location = New System.Drawing.Point(137, 83)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(100, 19)
-        Me.TextBox7.TabIndex = 5
+        Me.TextBox_Int2.Location = New System.Drawing.Point(31, 48)
+        Me.TextBox_Int2.Name = "TextBox_Int2"
+        Me.TextBox_Int2.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox_Int2.TabIndex = 1
         '
-        'TextBox6
+        'TextBox_Int1
         '
-        Me.TextBox6.Location = New System.Drawing.Point(6, 83)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(100, 19)
-        Me.TextBox6.TabIndex = 4
-        '
-        'TextBox5
-        '
-        Me.TextBox5.Location = New System.Drawing.Point(399, 33)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(100, 19)
-        Me.TextBox5.TabIndex = 3
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Location = New System.Drawing.Point(264, 33)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(100, 19)
-        Me.TextBox4.TabIndex = 2
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(137, 33)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(100, 19)
-        Me.TextBox3.TabIndex = 1
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(6, 33)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(100, 19)
-        Me.TextBox2.TabIndex = 0
+        Me.TextBox_Int1.Location = New System.Drawing.Point(31, 15)
+        Me.TextBox_Int1.Name = "TextBox_Int1"
+        Me.TextBox_Int1.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox_Int1.TabIndex = 0
         '
         'TabPage_Compare
         '
+        Me.TabPage_Compare.Controls.Add(Me.Button_ClearCompare)
+        Me.TabPage_Compare.Controls.Add(Me.Button_SetCompare)
         Me.TabPage_Compare.Controls.Add(Me.RadioButton6)
         Me.TabPage_Compare.Controls.Add(Me.RadioButton5)
         Me.TabPage_Compare.Controls.Add(Me.GroupBox3)
@@ -352,6 +277,24 @@ Partial Class Form1
         Me.TabPage_Compare.TabIndex = 1
         Me.TabPage_Compare.Text = "比較"
         Me.TabPage_Compare.UseVisualStyleBackColor = True
+        '
+        'Button_ClearCompare
+        '
+        Me.Button_ClearCompare.Location = New System.Drawing.Point(6, 235)
+        Me.Button_ClearCompare.Name = "Button_ClearCompare"
+        Me.Button_ClearCompare.Size = New System.Drawing.Size(151, 49)
+        Me.Button_ClearCompare.TabIndex = 17
+        Me.Button_ClearCompare.Text = "命令のクリア"
+        Me.Button_ClearCompare.UseVisualStyleBackColor = True
+        '
+        'Button_SetCompare
+        '
+        Me.Button_SetCompare.Location = New System.Drawing.Point(364, 235)
+        Me.Button_SetCompare.Name = "Button_SetCompare"
+        Me.Button_SetCompare.Size = New System.Drawing.Size(217, 49)
+        Me.Button_SetCompare.TabIndex = 15
+        Me.Button_SetCompare.Text = "命令をセットする"
+        Me.Button_SetCompare.UseVisualStyleBackColor = True
         '
         'RadioButton6
         '
@@ -478,6 +421,8 @@ Partial Class Form1
         '
         'TabPage_Jump
         '
+        Me.TabPage_Jump.Controls.Add(Me.Button_ClearJump)
+        Me.TabPage_Jump.Controls.Add(Me.Button_SetJump)
         Me.TabPage_Jump.Controls.Add(Me.Label15)
         Me.TabPage_Jump.Controls.Add(Me.Label14)
         Me.TabPage_Jump.Controls.Add(Me.ComboBox2)
@@ -487,6 +432,24 @@ Partial Class Form1
         Me.TabPage_Jump.TabIndex = 2
         Me.TabPage_Jump.Text = "ジャンプ"
         Me.TabPage_Jump.UseVisualStyleBackColor = True
+        '
+        'Button_ClearJump
+        '
+        Me.Button_ClearJump.Location = New System.Drawing.Point(3, 238)
+        Me.Button_ClearJump.Name = "Button_ClearJump"
+        Me.Button_ClearJump.Size = New System.Drawing.Size(151, 49)
+        Me.Button_ClearJump.TabIndex = 17
+        Me.Button_ClearJump.Text = "命令のクリア"
+        Me.Button_ClearJump.UseVisualStyleBackColor = True
+        '
+        'Button_SetJump
+        '
+        Me.Button_SetJump.Location = New System.Drawing.Point(367, 238)
+        Me.Button_SetJump.Name = "Button_SetJump"
+        Me.Button_SetJump.Size = New System.Drawing.Size(217, 49)
+        Me.Button_SetJump.TabIndex = 15
+        Me.Button_SetJump.Text = "命令をセットする"
+        Me.Button_SetJump.UseVisualStyleBackColor = True
         '
         'Label15
         '
@@ -517,8 +480,10 @@ Partial Class Form1
         'TabPage_Label
         '
         Me.TabPage_Label.Controls.Add(Me.Label18)
+        Me.TabPage_Label.Controls.Add(Me.Button_ClearLabelname)
         Me.TabPage_Label.Controls.Add(Me.Label17)
         Me.TabPage_Label.Controls.Add(Me.Label16)
+        Me.TabPage_Label.Controls.Add(Me.Button_SetLabelname)
         Me.TabPage_Label.Controls.Add(Me.TextBox12)
         Me.TabPage_Label.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_Label.Name = "TabPage_Label"
@@ -534,6 +499,15 @@ Partial Class Form1
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(0, 12)
         Me.Label18.TabIndex = 3
+        '
+        'Button_ClearLabelname
+        '
+        Me.Button_ClearLabelname.Location = New System.Drawing.Point(3, 238)
+        Me.Button_ClearLabelname.Name = "Button_ClearLabelname"
+        Me.Button_ClearLabelname.Size = New System.Drawing.Size(151, 49)
+        Me.Button_ClearLabelname.TabIndex = 16
+        Me.Button_ClearLabelname.Text = "命令のクリア"
+        Me.Button_ClearLabelname.UseVisualStyleBackColor = True
         '
         'Label17
         '
@@ -552,6 +526,15 @@ Partial Class Form1
         Me.Label16.Size = New System.Drawing.Size(51, 12)
         Me.Label16.TabIndex = 1
         Me.Label16.Text = "・ラベル名"
+        '
+        'Button_SetLabelname
+        '
+        Me.Button_SetLabelname.Location = New System.Drawing.Point(367, 238)
+        Me.Button_SetLabelname.Name = "Button_SetLabelname"
+        Me.Button_SetLabelname.Size = New System.Drawing.Size(217, 49)
+        Me.Button_SetLabelname.TabIndex = 14
+        Me.Button_SetLabelname.Text = "命令をセットする"
+        Me.Button_SetLabelname.UseVisualStyleBackColor = True
         '
         'TextBox12
         '
@@ -710,6 +693,38 @@ Partial Class Form1
         Me.TabPage3.Text = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
+        'Label_detail1
+        '
+        Me.Label_detail1.AutoSize = True
+        Me.Label_detail1.Location = New System.Drawing.Point(143, 18)
+        Me.Label_detail1.Name = "Label_detail1"
+        Me.Label_detail1.Size = New System.Drawing.Size(0, 12)
+        Me.Label_detail1.TabIndex = 19
+        '
+        'Label_detail2
+        '
+        Me.Label_detail2.AutoSize = True
+        Me.Label_detail2.Location = New System.Drawing.Point(143, 51)
+        Me.Label_detail2.Name = "Label_detail2"
+        Me.Label_detail2.Size = New System.Drawing.Size(0, 12)
+        Me.Label_detail2.TabIndex = 20
+        '
+        'Label_detail3
+        '
+        Me.Label_detail3.AutoSize = True
+        Me.Label_detail3.Location = New System.Drawing.Point(143, 83)
+        Me.Label_detail3.Name = "Label_detail3"
+        Me.Label_detail3.Size = New System.Drawing.Size(0, 12)
+        Me.Label_detail3.TabIndex = 21
+        '
+        'Label_detail4
+        '
+        Me.Label_detail4.AutoSize = True
+        Me.Label_detail4.Location = New System.Drawing.Point(143, 115)
+        Me.Label_detail4.Name = "Label_detail4"
+        Me.Label_detail4.Size = New System.Drawing.Size(0, 12)
+        Me.Label_detail4.TabIndex = 22
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -762,22 +777,14 @@ Partial Class Form1
     Friend WithEvents Button2 As Button
     Friend WithEvents TabControl2 As TabControl
     Friend WithEvents TabPage_Int As TabPage
-    Friend WithEvents Label13 As Label
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label11 As Label
-    Friend WithEvents Label10 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TextBox9 As TextBox
-    Friend WithEvents TextBox8 As TextBox
-    Friend WithEvents TextBox7 As TextBox
-    Friend WithEvents TextBox6 As TextBox
-    Friend WithEvents TextBox5 As TextBox
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox_Int4 As TextBox
+    Friend WithEvents TextBox_Int3 As TextBox
+    Friend WithEvents TextBox_Int2 As TextBox
+    Friend WithEvents TextBox_Int1 As TextBox
     Friend WithEvents TabPage_Compare As TabPage
     Friend WithEvents TabPage_Jump As TabPage
     Friend WithEvents Label14 As Label
@@ -793,9 +800,8 @@ Partial Class Form1
     Friend WithEvents RadioButton2 As RadioButton
     Friend WithEvents RadioButton1 As RadioButton
     Friend WithEvents Label15 As Label
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents Button_ClearLabelname As Button
+    Friend WithEvents Button_SetLabelname As Button
     Friend WithEvents RadioButton6 As RadioButton
     Friend WithEvents RadioButton5 As RadioButton
     Friend WithEvents TabPage_Label As TabPage
@@ -804,4 +810,14 @@ Partial Class Form1
     Friend WithEvents Label16 As Label
     Friend WithEvents TextBox12 As TextBox
     Friend WithEvents TextBox13 As TextBox
+    Friend WithEvents Button_SetInt As Button
+    Friend WithEvents Button_SetCompare As Button
+    Friend WithEvents Button_SetJump As Button
+    Friend WithEvents Button_ClearCompare As Button
+    Friend WithEvents Button_ClearJump As Button
+    Friend WithEvents Button_ClearInt As Button
+    Friend WithEvents Label_detail4 As Label
+    Friend WithEvents Label_detail3 As Label
+    Friend WithEvents Label_detail2 As Label
+    Friend WithEvents Label_detail1 As Label
 End Class
