@@ -22,7 +22,7 @@ Partial Class Form1
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBox_OrderList = New System.Windows.Forms.TextBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TextBox13 = New System.Windows.Forms.TextBox()
@@ -99,13 +99,14 @@ Partial Class Form1
         Me.TabPage1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TextBox1
+        'TextBox_OrderList
         '
-        Me.TextBox1.Location = New System.Drawing.Point(609, 0)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(171, 446)
-        Me.TextBox1.TabIndex = 0
+        Me.TextBox_OrderList.Location = New System.Drawing.Point(609, 0)
+        Me.TextBox_OrderList.Multiline = True
+        Me.TextBox_OrderList.Name = "TextBox_OrderList"
+        Me.TextBox_OrderList.ReadOnly = True
+        Me.TextBox_OrderList.Size = New System.Drawing.Size(171, 446)
+        Me.TextBox_OrderList.TabIndex = 0
         '
         'TabControl1
         '
@@ -126,7 +127,7 @@ Partial Class Form1
         Me.TabPage2.Controls.Add(Me.Label_CodeID)
         Me.TabPage2.Controls.Add(Me.Label4)
         Me.TabPage2.Controls.Add(Me.ComboBox1)
-        Me.TabPage2.Controls.Add(Me.TextBox1)
+        Me.TabPage2.Controls.Add(Me.TextBox_OrderList)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
@@ -756,7 +757,7 @@ Partial Class Form1
 
     End Sub
 
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TextBox_OrderList As TextBox
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents TabPage1 As TabPage
