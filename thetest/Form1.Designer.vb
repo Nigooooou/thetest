@@ -28,6 +28,10 @@ Partial Class Form1
         Me.TextBox13 = New System.Windows.Forms.TextBox()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPage_Int = New System.Windows.Forms.TabPage()
+        Me.Label_detail4 = New System.Windows.Forms.Label()
+        Me.Label_detail3 = New System.Windows.Forms.Label()
+        Me.Label_detail2 = New System.Windows.Forms.Label()
+        Me.Label_detail1 = New System.Windows.Forms.Label()
         Me.Button_ClearInt = New System.Windows.Forms.Button()
         Me.Button_SetInt = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -58,14 +62,14 @@ Partial Class Form1
         Me.Button_SetJump = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox_JumpLabel = New System.Windows.Forms.ComboBox()
         Me.TabPage_Label = New System.Windows.Forms.TabPage()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Button_ClearLabelname = New System.Windows.Forms.Button()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Button_SetLabelname = New System.Windows.Forms.Button()
-        Me.TextBox12 = New System.Windows.Forms.TextBox()
+        Me.TextBox_JumpLabel = New System.Windows.Forms.TextBox()
         Me.Label_CodeID = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
@@ -82,10 +86,6 @@ Partial Class Form1
         Me.TB_OutputDirectory = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.Label_detail1 = New System.Windows.Forms.Label()
-        Me.Label_detail2 = New System.Windows.Forms.Label()
-        Me.Label_detail3 = New System.Windows.Forms.Label()
-        Me.Label_detail4 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabControl2.SuspendLayout()
@@ -179,6 +179,38 @@ Partial Class Form1
         Me.TabPage_Int.TabIndex = 0
         Me.TabPage_Int.Text = "intのみ"
         Me.TabPage_Int.UseVisualStyleBackColor = True
+        '
+        'Label_detail4
+        '
+        Me.Label_detail4.AutoSize = True
+        Me.Label_detail4.Location = New System.Drawing.Point(143, 115)
+        Me.Label_detail4.Name = "Label_detail4"
+        Me.Label_detail4.Size = New System.Drawing.Size(0, 12)
+        Me.Label_detail4.TabIndex = 22
+        '
+        'Label_detail3
+        '
+        Me.Label_detail3.AutoSize = True
+        Me.Label_detail3.Location = New System.Drawing.Point(143, 83)
+        Me.Label_detail3.Name = "Label_detail3"
+        Me.Label_detail3.Size = New System.Drawing.Size(0, 12)
+        Me.Label_detail3.TabIndex = 21
+        '
+        'Label_detail2
+        '
+        Me.Label_detail2.AutoSize = True
+        Me.Label_detail2.Location = New System.Drawing.Point(143, 51)
+        Me.Label_detail2.Name = "Label_detail2"
+        Me.Label_detail2.Size = New System.Drawing.Size(0, 12)
+        Me.Label_detail2.TabIndex = 20
+        '
+        'Label_detail1
+        '
+        Me.Label_detail1.AutoSize = True
+        Me.Label_detail1.Location = New System.Drawing.Point(143, 18)
+        Me.Label_detail1.Name = "Label_detail1"
+        Me.Label_detail1.Size = New System.Drawing.Size(0, 12)
+        Me.Label_detail1.TabIndex = 19
         '
         'Button_ClearInt
         '
@@ -426,7 +458,7 @@ Partial Class Form1
         Me.TabPage_Jump.Controls.Add(Me.Button_SetJump)
         Me.TabPage_Jump.Controls.Add(Me.Label15)
         Me.TabPage_Jump.Controls.Add(Me.Label14)
-        Me.TabPage_Jump.Controls.Add(Me.ComboBox2)
+        Me.TabPage_Jump.Controls.Add(Me.ComboBox_JumpLabel)
         Me.TabPage_Jump.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_Jump.Name = "TabPage_Jump"
         Me.TabPage_Jump.Size = New System.Drawing.Size(587, 290)
@@ -470,13 +502,13 @@ Partial Class Form1
         Me.Label14.TabIndex = 1
         Me.Label14.Text = "ジャンプ先"
         '
-        'ComboBox2
+        'ComboBox_JumpLabel
         '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(3, 34)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(223, 20)
-        Me.ComboBox2.TabIndex = 0
+        Me.ComboBox_JumpLabel.FormattingEnabled = True
+        Me.ComboBox_JumpLabel.Location = New System.Drawing.Point(3, 34)
+        Me.ComboBox_JumpLabel.Name = "ComboBox_JumpLabel"
+        Me.ComboBox_JumpLabel.Size = New System.Drawing.Size(223, 20)
+        Me.ComboBox_JumpLabel.TabIndex = 0
         '
         'TabPage_Label
         '
@@ -485,7 +517,7 @@ Partial Class Form1
         Me.TabPage_Label.Controls.Add(Me.Label17)
         Me.TabPage_Label.Controls.Add(Me.Label16)
         Me.TabPage_Label.Controls.Add(Me.Button_SetLabelname)
-        Me.TabPage_Label.Controls.Add(Me.TextBox12)
+        Me.TabPage_Label.Controls.Add(Me.TextBox_JumpLabel)
         Me.TabPage_Label.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_Label.Name = "TabPage_Label"
         Me.TabPage_Label.Size = New System.Drawing.Size(587, 290)
@@ -537,12 +569,12 @@ Partial Class Form1
         Me.Button_SetLabelname.Text = "命令をセットする"
         Me.Button_SetLabelname.UseVisualStyleBackColor = True
         '
-        'TextBox12
+        'TextBox_JumpLabel
         '
-        Me.TextBox12.Location = New System.Drawing.Point(0, 33)
-        Me.TextBox12.Name = "TextBox12"
-        Me.TextBox12.Size = New System.Drawing.Size(218, 19)
-        Me.TextBox12.TabIndex = 0
+        Me.TextBox_JumpLabel.Location = New System.Drawing.Point(0, 33)
+        Me.TextBox_JumpLabel.Name = "TextBox_JumpLabel"
+        Me.TextBox_JumpLabel.Size = New System.Drawing.Size(218, 19)
+        Me.TextBox_JumpLabel.TabIndex = 0
         '
         'Label_CodeID
         '
@@ -694,38 +726,6 @@ Partial Class Form1
         Me.TabPage3.Text = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
-        'Label_detail1
-        '
-        Me.Label_detail1.AutoSize = True
-        Me.Label_detail1.Location = New System.Drawing.Point(143, 18)
-        Me.Label_detail1.Name = "Label_detail1"
-        Me.Label_detail1.Size = New System.Drawing.Size(0, 12)
-        Me.Label_detail1.TabIndex = 19
-        '
-        'Label_detail2
-        '
-        Me.Label_detail2.AutoSize = True
-        Me.Label_detail2.Location = New System.Drawing.Point(143, 51)
-        Me.Label_detail2.Name = "Label_detail2"
-        Me.Label_detail2.Size = New System.Drawing.Size(0, 12)
-        Me.Label_detail2.TabIndex = 20
-        '
-        'Label_detail3
-        '
-        Me.Label_detail3.AutoSize = True
-        Me.Label_detail3.Location = New System.Drawing.Point(143, 83)
-        Me.Label_detail3.Name = "Label_detail3"
-        Me.Label_detail3.Size = New System.Drawing.Size(0, 12)
-        Me.Label_detail3.TabIndex = 21
-        '
-        'Label_detail4
-        '
-        Me.Label_detail4.AutoSize = True
-        Me.Label_detail4.Location = New System.Drawing.Point(143, 115)
-        Me.Label_detail4.Name = "Label_detail4"
-        Me.Label_detail4.Size = New System.Drawing.Size(0, 12)
-        Me.Label_detail4.TabIndex = 22
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -789,7 +789,7 @@ Partial Class Form1
     Friend WithEvents TabPage_Compare As TabPage
     Friend WithEvents TabPage_Jump As TabPage
     Friend WithEvents Label14 As Label
-    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents ComboBox_JumpLabel As ComboBox
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents TextBox11 As TextBox
     Friend WithEvents RadioButton4 As RadioButton
@@ -809,7 +809,7 @@ Partial Class Form1
     Friend WithEvents Label18 As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents Label16 As Label
-    Friend WithEvents TextBox12 As TextBox
+    Friend WithEvents TextBox_JumpLabel As TextBox
     Friend WithEvents TextBox13 As TextBox
     Friend WithEvents Button_SetInt As Button
     Friend WithEvents Button_SetCompare As Button

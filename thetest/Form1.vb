@@ -24,6 +24,8 @@
             sr.Close()
         End If
         mIntLabelControls = New Label() {Label_detail1, Label_detail2, Label_detail3, Label_detail4}
+        ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList
+        ComboBox_JumpLabel.DropDownStyle = ComboBoxStyle.DropDownList
     End Sub
 
     Private Sub 設定ToolStripMenuItem1_Click(sender As Object, e As EventArgs)
@@ -60,6 +62,7 @@
 
     Dim mListOriginalString As List(Of String) = New List(Of String)
     Dim mDictJumpLabel As Dictionary(Of String, Integer) = New Dictionary(Of String, Integer)
+    Dim miLabelCounter As Integer = 0
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If String.IsNullOrWhiteSpace(TB_CSVFilePath.Text) = True Then
             MessageBox.Show("ファイルパスが正しく設定されていません")
@@ -179,6 +182,9 @@
     End Sub
 
     Private Sub Button_SetInt_Click(sender As Object, e As EventArgs) Handles Button_SetInt.Click
+        If CheckOrderValidation() = False Then
+            Return
+        End If
         Dim tmpstr As String = ComboBox1.SelectedItem
         Dim textboxarray As TextBox() = New TextBox() {TextBox_Int1, TextBox_Int2, TextBox_Int3, TextBox_Int4}
         Dim i As Integer
@@ -193,7 +199,7 @@
                 End If
             End If
         Next
-        TextBox_OrderList.AppendText(tmpstr)
+        TextBox_OrderList.AppendText(tmpstr & vbCrLf)
     End Sub
 
     Private Sub Button_ClearInt_Click(sender As Object, e As EventArgs) Handles Button_ClearInt.Click
@@ -212,22 +218,56 @@
     End Sub
 
     Private Sub Button_SetJump_Click(sender As Object, e As EventArgs) Handles Button_SetJump.Click
-
+        If CheckOrderValidation() = False Then
+            Return
+        End If
+        If ComboBox_JumpLabel.SelectedIndex <> -1 Then
+            Dim tmpstr As String = ComboBox1.SelectedItem & "," & ComboBox_JumpLabel.SelectedItem & vbCrLf
+            TextBox_OrderList.AppendText(tmpstr)
+        Else
+            MessageBox.Show("ジャンプ先ラベルが選択されていません")
+        End If
+        ComboBox_JumpLabel.SelectedIndex = -1
     End Sub
 
     Private Sub Button_ClearJump_Click(sender As Object, e As EventArgs) Handles Button_ClearJump.Click
-
+        ComboBox_JumpLabel.SelectedIndex = -1
     End Sub
 
     Private Sub Button_SetLabelname_Click(sender As Object, e As EventArgs) Handles Button_SetLabelname.Click
+        If CheckOrderValidation() = False Then
+            Return
+        End If
+        If String.IsNullOrWhiteSpace(TextBox_JumpLabel.Text) = True Then
+            MessageBox.Show("ラベルの文字列には空白・記入無しなどは使えません"）
+            Return
+        End If
 
+        If mDictJumpLabel.ContainsKey(TextBox_JumpLabel.Text) Then
+            MessageBox.Show("すでに使われているラベルです")
+            Return
+        Else
+            mDictJumpLabel.Add(TextBox_JumpLabel.Text, miLabelCounter)
+            miLabelCounter = miLabelCounter + 1
+        End If
+        Dim tmpstr As String = ComboBox1.SelectedItem & "," & TextBox_JumpLabel.Text & vbCrLf
+        TextBox_OrderList.AppendText(tmpstr)
+        ComboBox_JumpLabel.Items.Clear()
+        For Each str As String In mDictJumpLabel.Keys
+            ComboBox_JumpLabel.Items.Add(str)
+        Next
+        TextBox_JumpLabel.Clear()
     End Sub
 
     Private Sub Button_ClearLabelname_Click(sender As Object, e As EventArgs) Handles Button_ClearLabelname.Click
-
+        TextBox_JumpLabel.Clear()
     End Sub
 
-    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
-
-    End Sub
+    Private Function CheckOrderValidation() As Boolean
+        If ComboBox1.SelectedIndex = -1 Then
+            MessageBox.Show("命令が選択されていません")
+            Return False
+        End If
+        Return True
+    End Function
 End Class
