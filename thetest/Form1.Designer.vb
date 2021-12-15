@@ -25,6 +25,7 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TextBox13 = New System.Windows.Forms.TextBox()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -84,7 +85,6 @@ Partial Class Form1
         Me.TB_OutputDirectory = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.TextBox13 = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabControl2.SuspendLayout()
@@ -136,6 +136,14 @@ Partial Class Form1
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "基本画面"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TextBox13
+        '
+        Me.TextBox13.Location = New System.Drawing.Point(8, 51)
+        Me.TextBox13.Name = "TextBox13"
+        Me.TextBox13.ReadOnly = True
+        Me.TextBox13.Size = New System.Drawing.Size(591, 19)
+        Me.TextBox13.TabIndex = 17
         '
         'Button5
         '
@@ -485,9 +493,9 @@ Partial Class Form1
         Me.Label15.AutoSize = True
         Me.Label15.Location = New System.Drawing.Point(3, 57)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(414, 12)
+        Me.Label15.Size = New System.Drawing.Size(313, 12)
         Me.Label15.TabIndex = 2
-        Me.Label15.Text = "最終的なboolレジスタに登録された値を評価します。trueならジャンプラベル先に飛びます"
+        Me.Label15.Text = "boolレジスタに登録された値を評価し、trueならラベル先に飛びます"
         '
         'Label14
         '
@@ -532,9 +540,9 @@ Partial Class Form1
         Me.Label17.AutoSize = True
         Me.Label17.Location = New System.Drawing.Point(5, 55)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(391, 12)
+        Me.Label17.Size = New System.Drawing.Size(309, 12)
         Me.Label17.TabIndex = 2
-        Me.Label17.Text = "ジャンプラベルの設定をします。１データセット内にラベルの重複は許可していません。"
+        Me.Label17.Text = "ジャンプラベルの設定をします。ラベルの重複は許可していません。"
         '
         'Label16
         '
@@ -701,14 +709,6 @@ Partial Class Form1
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
-        '
-        'TextBox13
-        '
-        Me.TextBox13.Location = New System.Drawing.Point(8, 51)
-        Me.TextBox13.Name = "TextBox13"
-        Me.TextBox13.ReadOnly = True
-        Me.TextBox13.Size = New System.Drawing.Size(591, 19)
-        Me.TextBox13.TabIndex = 17
         '
         'Form1
         '
