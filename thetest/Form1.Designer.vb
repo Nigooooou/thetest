@@ -86,6 +86,7 @@ Partial Class Form1
         Me.TB_OutputDirectory = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.ListBox_OrderSet = New System.Windows.Forms.ListBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabControl2.SuspendLayout()
@@ -101,11 +102,11 @@ Partial Class Form1
         '
         'TextBox_OrderList
         '
-        Me.TextBox_OrderList.Location = New System.Drawing.Point(609, 0)
+        Me.TextBox_OrderList.Location = New System.Drawing.Point(725, 0)
         Me.TextBox_OrderList.Multiline = True
         Me.TextBox_OrderList.Name = "TextBox_OrderList"
         Me.TextBox_OrderList.ReadOnly = True
-        Me.TextBox_OrderList.Size = New System.Drawing.Size(171, 446)
+        Me.TextBox_OrderList.Size = New System.Drawing.Size(55, 446)
         Me.TextBox_OrderList.TabIndex = 0
         '
         'TabControl1
@@ -122,6 +123,7 @@ Partial Class Form1
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.ListBox_OrderSet)
         Me.TabPage2.Controls.Add(Me.TextBox13)
         Me.TabPage2.Controls.Add(Me.TabControl2)
         Me.TabPage2.Controls.Add(Me.Label_CodeID)
@@ -726,6 +728,15 @@ Partial Class Form1
         Me.TabPage3.Text = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
+        'ListBox_OrderSet
+        '
+        Me.ListBox_OrderSet.FormattingEnabled = True
+        Me.ListBox_OrderSet.ItemHeight = 12
+        Me.ListBox_OrderSet.Location = New System.Drawing.Point(605, 3)
+        Me.ListBox_OrderSet.Name = "ListBox_OrderSet"
+        Me.ListBox_OrderSet.Size = New System.Drawing.Size(114, 436)
+        Me.ListBox_OrderSet.TabIndex = 18
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -821,4 +832,5 @@ Partial Class Form1
     Friend WithEvents Label_detail3 As Label
     Friend WithEvents Label_detail2 As Label
     Friend WithEvents Label_detail1 As Label
+    Friend WithEvents ListBox_OrderSet As ListBox
 End Class

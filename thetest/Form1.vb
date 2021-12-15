@@ -17,10 +17,10 @@
             Dim str As String = ""
             Do While sr.EndOfStream = False
                 str = sr.ReadLine
-                '                TB_ML_Settings.AppendText(str & vbCrLf)
+                'TB_ML_Settings.AppendText(str & vbCrLf)
             Loop
 
-            '            TB_ML_Settings.Text = str
+            'TB_ML_Settings.Text = str
             sr.Close()
         End If
         mIntLabelControls = New Label() {Label_detail1, Label_detail2, Label_detail3, Label_detail4}
@@ -251,7 +251,8 @@
             miLabelCounter = miLabelCounter + 1
         End If
         Dim tmpstr As String = ComboBox1.SelectedItem & "," & TextBox_JumpLabel.Text & vbCrLf
-        TextBox_OrderList.AppendText(tmpstr)
+        'TextBox_OrderList.AppendText(tmpstr)
+        ListBox_OrderSet.Items.Add(tmpstr)
         ComboBox_JumpLabel.Items.Clear()
         For Each str As String In mDictJumpLabel.Keys
             ComboBox_JumpLabel.Items.Add(str)
@@ -270,4 +271,9 @@
         End If
         Return True
     End Function
+
+    Private Sub ListBox_OrderSet_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox_OrderSet.SelectedIndexChanged
+        MessageBox.Show(ListBox_OrderSet.SelectedItem)
+
+    End Sub
 End Class
