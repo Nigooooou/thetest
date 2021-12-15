@@ -332,7 +332,7 @@ Partial Class Form1
         'RadioButton6
         '
         Me.RadioButton6.AutoSize = True
-        Me.RadioButton6.Location = New System.Drawing.Point(3, 202)
+        Me.RadioButton6.Location = New System.Drawing.Point(3, 141)
         Me.RadioButton6.Name = "RadioButton6"
         Me.RadioButton6.Size = New System.Drawing.Size(45, 16)
         Me.RadioButton6.TabIndex = 3

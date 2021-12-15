@@ -181,21 +181,22 @@
         End If
     End Sub
 
+    Dim marTextBox_Int As TextBox() = New TextBox() {TextBox_Int1, TextBox_Int2, TextBox_Int3, TextBox_Int4}
     Private Sub Button_SetInt_Click(sender As Object, e As EventArgs) Handles Button_SetInt.Click
         If CheckOrderValidation() = False Then
             Return
         End If
         Dim tmpstr As String = ComboBox1.SelectedItem
-        Dim textboxarray As TextBox() = New TextBox() {TextBox_Int1, TextBox_Int2, TextBox_Int3, TextBox_Int4}
         Dim i As Integer
         For i = 0 To 3
-            If mIntLabelControls(i).Text.Length > 0 And String.IsNullOrWhiteSpace(textboxarray(i).Text) = True Then
+            If mIntLabelControls(i).Text.Length > 0 And String.IsNullOrWhiteSpace(marTextBox_Int(i).Text) = True Then
                 MessageBox.Show(i + 1 & "番の入力が不足しています")
                 Return
             Else
                 '詳細のある項目だけデータとして扱う。詳細なし項目のデータは無視
-                If mIntLabelControls(i).Text.Length > 0 Then
-                    tmpstr = tmpstr & "," & textboxarray(i).Text
+                'また、入力テキストぼっくすのテキスト長が1以上なければ無視
+                If mIntLabelControls(i).Text.Length > 0 And marTextBox_Int.Length > 0 Then
+                    tmpstr = tmpstr & "," & marTextBox_Int(i).Text
                 End If
             End If
         Next
@@ -203,9 +204,8 @@
     End Sub
 
     Private Sub Button_ClearInt_Click(sender As Object, e As EventArgs) Handles Button_ClearInt.Click
-        Dim textboxarray As TextBox() = New TextBox() {TextBox_Int1, TextBox_Int2, TextBox_Int3, TextBox_Int4}
         For i = 0 To 3
-            textboxarray(i).Clear()
+            marTextBox_Int(i).Clear()
         Next
     End Sub
 
