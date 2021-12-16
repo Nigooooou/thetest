@@ -22,9 +22,13 @@ Partial Class Form1
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TextBox_OrderList = New System.Windows.Forms.TextBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.TextBox_CurrentOrder = New System.Windows.Forms.TextBox()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.ListBox_OrderSet = New System.Windows.Forms.ListBox()
         Me.TextBox13 = New System.Windows.Forms.TextBox()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPage_Int = New System.Windows.Forms.TabPage()
@@ -86,7 +90,6 @@ Partial Class Form1
         Me.TB_OutputDirectory = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.ListBox_OrderSet = New System.Windows.Forms.ListBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabControl2.SuspendLayout()
@@ -100,15 +103,6 @@ Partial Class Form1
         Me.TabPage1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TextBox_OrderList
-        '
-        Me.TextBox_OrderList.Location = New System.Drawing.Point(725, 0)
-        Me.TextBox_OrderList.Multiline = True
-        Me.TextBox_OrderList.Name = "TextBox_OrderList"
-        Me.TextBox_OrderList.ReadOnly = True
-        Me.TextBox_OrderList.Size = New System.Drawing.Size(55, 446)
-        Me.TextBox_OrderList.TabIndex = 0
-        '
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPage2)
@@ -117,33 +111,82 @@ Partial Class Form1
         Me.TabControl1.Location = New System.Drawing.Point(4, 12)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(784, 479)
+        Me.TabControl1.Size = New System.Drawing.Size(1097, 479)
         Me.TabControl1.TabIndex = 9
         Me.TabControl1.Tag = ""
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.Label10)
+        Me.TabPage2.Controls.Add(Me.Button4)
+        Me.TabPage2.Controls.Add(Me.TextBox_CurrentOrder)
+        Me.TabPage2.Controls.Add(Me.Button3)
         Me.TabPage2.Controls.Add(Me.ListBox_OrderSet)
         Me.TabPage2.Controls.Add(Me.TextBox13)
         Me.TabPage2.Controls.Add(Me.TabControl2)
         Me.TabPage2.Controls.Add(Me.Label_CodeID)
         Me.TabPage2.Controls.Add(Me.Label4)
         Me.TabPage2.Controls.Add(Me.ComboBox1)
-        Me.TabPage2.Controls.Add(Me.TextBox_OrderList)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(776, 453)
+        Me.TabPage2.Size = New System.Drawing.Size(1089, 453)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "基本画面"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(757, 437)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(326, 12)
+        Me.Label10.TabIndex = 22
+        Me.Label10.Text = "命令リストの選択はフォームの開いているところをクリックすることで解除"
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(336, 398)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(165, 19)
+        Me.Button4.TabIndex = 21
+        Me.Button4.Text = "カーソル上に空命令行を挿入"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'TextBox_CurrentOrder
+        '
+        Me.TextBox_CurrentOrder.Location = New System.Drawing.Point(507, 398)
+        Me.TextBox_CurrentOrder.Name = "TextBox_CurrentOrder"
+        Me.TextBox_CurrentOrder.ReadOnly = True
+        Me.TextBox_CurrentOrder.Size = New System.Drawing.Size(418, 19)
+        Me.TextBox_CurrentOrder.TabIndex = 20
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(932, 398)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(151, 19)
+        Me.Button3.TabIndex = 19
+        Me.Button3.Text = "リストから選択セットを削除"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'ListBox_OrderSet
+        '
+        Me.ListBox_OrderSet.FormattingEnabled = True
+        Me.ListBox_OrderSet.ItemHeight = 12
+        Me.ListBox_OrderSet.Location = New System.Drawing.Point(605, 51)
+        Me.ListBox_OrderSet.Name = "ListBox_OrderSet"
+        Me.ListBox_OrderSet.ScrollAlwaysVisible = True
+        Me.ListBox_OrderSet.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.ListBox_OrderSet.Size = New System.Drawing.Size(478, 340)
+        Me.ListBox_OrderSet.TabIndex = 18
+        '
         'TextBox13
         '
-        Me.TextBox13.Location = New System.Drawing.Point(8, 51)
+        Me.TextBox13.Location = New System.Drawing.Point(822, 26)
         Me.TextBox13.Name = "TextBox13"
         Me.TextBox13.ReadOnly = True
-        Me.TextBox13.Size = New System.Drawing.Size(591, 19)
+        Me.TextBox13.Size = New System.Drawing.Size(261, 19)
         Me.TextBox13.TabIndex = 17
         '
         'TabControl2
@@ -216,20 +259,20 @@ Partial Class Form1
         '
         'Button_ClearInt
         '
-        Me.Button_ClearInt.Location = New System.Drawing.Point(3, 235)
+        Me.Button_ClearInt.Location = New System.Drawing.Point(3, 238)
         Me.Button_ClearInt.Name = "Button_ClearInt"
-        Me.Button_ClearInt.Size = New System.Drawing.Size(151, 49)
+        Me.Button_ClearInt.Size = New System.Drawing.Size(78, 46)
         Me.Button_ClearInt.TabIndex = 18
         Me.Button_ClearInt.Text = "命令のクリア"
         Me.Button_ClearInt.UseVisualStyleBackColor = True
         '
         'Button_SetInt
         '
-        Me.Button_SetInt.Location = New System.Drawing.Point(367, 238)
+        Me.Button_SetInt.Location = New System.Drawing.Point(485, 235)
         Me.Button_SetInt.Name = "Button_SetInt"
-        Me.Button_SetInt.Size = New System.Drawing.Size(217, 49)
+        Me.Button_SetInt.Size = New System.Drawing.Size(96, 49)
         Me.Button_SetInt.TabIndex = 16
-        Me.Button_SetInt.Text = "命令をセットする"
+        Me.Button_SetInt.Text = "命令追加"
         Me.Button_SetInt.UseVisualStyleBackColor = True
         '
         'Label9
@@ -317,18 +360,18 @@ Partial Class Form1
         '
         Me.Button_ClearCompare.Location = New System.Drawing.Point(6, 235)
         Me.Button_ClearCompare.Name = "Button_ClearCompare"
-        Me.Button_ClearCompare.Size = New System.Drawing.Size(151, 49)
+        Me.Button_ClearCompare.Size = New System.Drawing.Size(79, 49)
         Me.Button_ClearCompare.TabIndex = 17
         Me.Button_ClearCompare.Text = "命令のクリア"
         Me.Button_ClearCompare.UseVisualStyleBackColor = True
         '
         'Button_SetCompare
         '
-        Me.Button_SetCompare.Location = New System.Drawing.Point(364, 235)
+        Me.Button_SetCompare.Location = New System.Drawing.Point(482, 238)
         Me.Button_SetCompare.Name = "Button_SetCompare"
-        Me.Button_SetCompare.Size = New System.Drawing.Size(217, 49)
+        Me.Button_SetCompare.Size = New System.Drawing.Size(102, 49)
         Me.Button_SetCompare.TabIndex = 15
-        Me.Button_SetCompare.Text = "命令をセットする"
+        Me.Button_SetCompare.Text = "命令追加"
         Me.Button_SetCompare.UseVisualStyleBackColor = True
         '
         'RadioButton6
@@ -472,18 +515,18 @@ Partial Class Form1
         '
         Me.Button_ClearJump.Location = New System.Drawing.Point(3, 238)
         Me.Button_ClearJump.Name = "Button_ClearJump"
-        Me.Button_ClearJump.Size = New System.Drawing.Size(151, 49)
+        Me.Button_ClearJump.Size = New System.Drawing.Size(77, 49)
         Me.Button_ClearJump.TabIndex = 17
         Me.Button_ClearJump.Text = "命令のクリア"
         Me.Button_ClearJump.UseVisualStyleBackColor = True
         '
         'Button_SetJump
         '
-        Me.Button_SetJump.Location = New System.Drawing.Point(367, 238)
+        Me.Button_SetJump.Location = New System.Drawing.Point(485, 238)
         Me.Button_SetJump.Name = "Button_SetJump"
-        Me.Button_SetJump.Size = New System.Drawing.Size(217, 49)
+        Me.Button_SetJump.Size = New System.Drawing.Size(99, 49)
         Me.Button_SetJump.TabIndex = 15
-        Me.Button_SetJump.Text = "命令をセットする"
+        Me.Button_SetJump.Text = "命令追加"
         Me.Button_SetJump.UseVisualStyleBackColor = True
         '
         'Label15
@@ -539,7 +582,7 @@ Partial Class Form1
         '
         Me.Button_ClearLabelname.Location = New System.Drawing.Point(3, 238)
         Me.Button_ClearLabelname.Name = "Button_ClearLabelname"
-        Me.Button_ClearLabelname.Size = New System.Drawing.Size(151, 49)
+        Me.Button_ClearLabelname.Size = New System.Drawing.Size(80, 49)
         Me.Button_ClearLabelname.TabIndex = 16
         Me.Button_ClearLabelname.Text = "命令のクリア"
         Me.Button_ClearLabelname.UseVisualStyleBackColor = True
@@ -564,11 +607,11 @@ Partial Class Form1
         '
         'Button_SetLabelname
         '
-        Me.Button_SetLabelname.Location = New System.Drawing.Point(367, 238)
+        Me.Button_SetLabelname.Location = New System.Drawing.Point(483, 238)
         Me.Button_SetLabelname.Name = "Button_SetLabelname"
-        Me.Button_SetLabelname.Size = New System.Drawing.Size(217, 49)
+        Me.Button_SetLabelname.Size = New System.Drawing.Size(101, 49)
         Me.Button_SetLabelname.TabIndex = 14
-        Me.Button_SetLabelname.Text = "命令をセットする"
+        Me.Button_SetLabelname.Text = "命令追加"
         Me.Button_SetLabelname.UseVisualStyleBackColor = True
         '
         'TextBox_JumpLabel
@@ -590,7 +633,7 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 13)
+        Me.Label4.Location = New System.Drawing.Point(6, 35)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(56, 12)
         Me.Label4.TabIndex = 11
@@ -599,9 +642,9 @@ Partial Class Form1
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(8, 28)
+        Me.ComboBox1.Location = New System.Drawing.Point(8, 50)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(276, 20)
+        Me.ComboBox1.Size = New System.Drawing.Size(591, 20)
         Me.ComboBox1.TabIndex = 10
         '
         'TabPage1
@@ -620,23 +663,23 @@ Partial Class Form1
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(776, 453)
+        Me.TabPage1.Size = New System.Drawing.Size(1089, 453)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "設定ファイル"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(19, 325)
+        Me.Button2.Location = New System.Drawing.Point(7, 142)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(487, 27)
         Me.Button2.TabIndex = 20
-        Me.Button2.Text = "このファイルを走査"
+        Me.Button2.Text = "命令コード定義ファイルを走査"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Btn_opencsvfiledialog
         '
-        Me.Btn_opencsvfiledialog.Location = New System.Drawing.Point(529, 300)
+        Me.Btn_opencsvfiledialog.Location = New System.Drawing.Point(501, 117)
         Me.Btn_opencsvfiledialog.Name = "Btn_opencsvfiledialog"
         Me.Btn_opencsvfiledialog.Size = New System.Drawing.Size(75, 19)
         Me.Btn_opencsvfiledialog.TabIndex = 19
@@ -645,40 +688,41 @@ Partial Class Form1
         '
         'TB_CSVFilePath
         '
-        Me.TB_CSVFilePath.Location = New System.Drawing.Point(20, 300)
+        Me.TB_CSVFilePath.Location = New System.Drawing.Point(8, 117)
         Me.TB_CSVFilePath.Name = "TB_CSVFilePath"
+        Me.TB_CSVFilePath.ReadOnly = True
         Me.TB_CSVFilePath.Size = New System.Drawing.Size(487, 19)
         Me.TB_CSVFilePath.TabIndex = 18
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(18, 285)
+        Me.Label6.Location = New System.Drawing.Point(6, 102)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(114, 12)
+        Me.Label6.Size = New System.Drawing.Size(172, 12)
         Me.Label6.TabIndex = 17
-        Me.Label6.Text = "・命令コードCSVのパス"
+        Me.Label6.Text = "・命令コード定義CSVファイルのパス"
         '
         'TB_ML_Settings
         '
-        Me.TB_ML_Settings.Location = New System.Drawing.Point(19, 156)
+        Me.TB_ML_Settings.Location = New System.Drawing.Point(583, 24)
         Me.TB_ML_Settings.Multiline = True
         Me.TB_ML_Settings.Name = "TB_ML_Settings"
-        Me.TB_ML_Settings.Size = New System.Drawing.Size(487, 114)
+        Me.TB_ML_Settings.Size = New System.Drawing.Size(500, 422)
         Me.TB_ML_Settings.TabIndex = 16
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(17, 132)
+        Me.Label3.Location = New System.Drawing.Point(581, 9)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(197, 12)
+        Me.Label3.Size = New System.Drawing.Size(103, 12)
         Me.Label3.TabIndex = 15
-        Me.Label3.Text = "・ツール設定ファイル(settings.txt)の内容"
+        Me.Label3.Text = "・定義ファイルの内容"
         '
         'TB_CurrentDir
         '
-        Me.TB_CurrentDir.Location = New System.Drawing.Point(19, 92)
+        Me.TB_CurrentDir.Location = New System.Drawing.Point(8, 70)
         Me.TB_CurrentDir.Name = "TB_CurrentDir"
         Me.TB_CurrentDir.ReadOnly = True
         Me.TB_CurrentDir.Size = New System.Drawing.Size(487, 19)
@@ -687,7 +731,7 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(17, 77)
+        Me.Label2.Location = New System.Drawing.Point(6, 55)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(128, 12)
         Me.Label2.TabIndex = 13
@@ -696,7 +740,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(17, 23)
+        Me.Label1.Location = New System.Drawing.Point(6, 9)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(239, 12)
         Me.Label1.TabIndex = 12
@@ -704,14 +748,15 @@ Partial Class Form1
         '
         'TB_OutputDirectory
         '
-        Me.TB_OutputDirectory.Location = New System.Drawing.Point(19, 38)
+        Me.TB_OutputDirectory.Location = New System.Drawing.Point(8, 24)
         Me.TB_OutputDirectory.Name = "TB_OutputDirectory"
+        Me.TB_OutputDirectory.ReadOnly = True
         Me.TB_OutputDirectory.Size = New System.Drawing.Size(487, 19)
         Me.TB_OutputDirectory.TabIndex = 11
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(529, 38)
+        Me.Button1.Location = New System.Drawing.Point(502, 24)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 19)
         Me.Button1.TabIndex = 10
@@ -723,25 +768,16 @@ Partial Class Form1
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(776, 453)
+        Me.TabPage3.Size = New System.Drawing.Size(1089, 453)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
-        '
-        'ListBox_OrderSet
-        '
-        Me.ListBox_OrderSet.FormattingEnabled = True
-        Me.ListBox_OrderSet.ItemHeight = 12
-        Me.ListBox_OrderSet.Location = New System.Drawing.Point(605, 3)
-        Me.ListBox_OrderSet.Name = "ListBox_OrderSet"
-        Me.ListBox_OrderSet.Size = New System.Drawing.Size(114, 436)
-        Me.ListBox_OrderSet.TabIndex = 18
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(792, 492)
+        Me.ClientSize = New System.Drawing.Size(1113, 492)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "Form1"
         Me.Text = "Form1"
@@ -767,8 +803,6 @@ Partial Class Form1
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents TextBox_OrderList As TextBox
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents TabPage1 As TabPage
@@ -833,4 +867,8 @@ Partial Class Form1
     Friend WithEvents Label_detail2 As Label
     Friend WithEvents Label_detail1 As Label
     Friend WithEvents ListBox_OrderSet As ListBox
+    Friend WithEvents Button3 As Button
+    Friend WithEvents TextBox_CurrentOrder As TextBox
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Label10 As Label
 End Class
