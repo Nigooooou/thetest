@@ -1,6 +1,7 @@
 ﻿Public Class Form1
     Dim mSettingsDict As Dictionary(Of String, Int32)
     Dim mIntLabelControls As Label()
+    Dim marTextBox_Int As TextBox()
 
     Shared Sub Main()
         If Diagnostics.Process.GetProcessesByName(Diagnostics.Process.GetCurrentProcess.ProcessName).Length > 1 Then
@@ -10,6 +11,11 @@
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If IO.File.Exists(My.Settings.OutputFilePath) = True Then
+            TB_CSVFilePath.Text = My.Settings.OutputFilePath
+            ParseDefinitionFile()
+        Else
+        End If
         TB_CurrentDir.Text = IO.Directory.GetCurrentDirectory()
         Dim filename As String = "settings.txt"
         If IO.File.Exists(IO.Directory.GetCurrentDirectory() & "\" & filename) = True Then
@@ -23,7 +29,6 @@
             'TB_ML_Settings.Text = str
             sr.Close()
         End If
-        mIntLabelControls = New Label() {Label_detail1, Label_detail2, Label_detail3, Label_detail4}
         ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList
         ComboBox_JumpLabel.DropDownStyle = ComboBoxStyle.DropDownList
     End Sub
@@ -55,15 +60,18 @@
         opencsvfiledlg.FilterIndex = 1
         If opencsvfiledlg.ShowDialog() = DialogResult.OK Then
             TB_CSVFilePath.Text = opencsvfiledlg.FileName
+            My.Settings.OutputFilePath = opencsvfiledlg.FileName
         End If
-
-
     End Sub
 
     Dim mListOriginalString As List(Of String) = New List(Of String)
     Dim mDictJumpLabel As Dictionary(Of String, Integer) = New Dictionary(Of String, Integer)
     Dim miLabelCounter As Integer = 0
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        ParseDefinitionFile()
+    End Sub
+
+    Private Sub ParseDefinitionFile()
         If String.IsNullOrWhiteSpace(TB_CSVFilePath.Text) = True Then
             MessageBox.Show("ファイルパスが正しく設定されていません")
             Return
@@ -111,7 +119,6 @@
             ComboBox1.Items.Add(strarray(1))
         Loop
         sr.Close()
-
     End Sub
 
     Private Function GetIDFromDescription(desc As String) As Integer
@@ -136,6 +143,7 @@
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         If ComboBox1.SelectedItem IsNot Nothing Then
+            mIntLabelControls = New Label() {Label_detail1, Label_detail2, Label_detail3, Label_detail4}
             Dim id As Integer = GetIDFromDescription(ComboBox1.SelectedItem)
             If id <> -1 Then
                 Label_CodeID.Text = "コードID:" & id
@@ -181,11 +189,13 @@
         End If
     End Sub
 
-    Dim marTextBox_Int As TextBox() = New TextBox() {TextBox_Int1, TextBox_Int2, TextBox_Int3, TextBox_Int4}
     Private Sub Button_SetInt_Click(sender As Object, e As EventArgs) Handles Button_SetInt.Click
         If CheckOrderValidation() = False Then
             Return
         End If
+        mIntLabelControls = New Label() {Label_detail1, Label_detail2, Label_detail3, Label_detail4}
+        marTextBox_Int = New TextBox() {TextBox_Int1, TextBox_Int2, TextBox_Int3, TextBox_Int4}
+
         Dim tmpstr As String = ComboBox1.SelectedItem
         Dim i As Integer
         For i = 0 To 3
@@ -200,10 +210,11 @@
                 End If
             End If
         Next
-        TextBox_OrderList.AppendText(tmpstr & vbCrLf)
+        AddOrderPack(tmpstr)
     End Sub
 
     Private Sub Button_ClearInt_Click(sender As Object, e As EventArgs) Handles Button_ClearInt.Click
+        marTextBox_Int = New TextBox() {TextBox_Int1, TextBox_Int2, TextBox_Int3, TextBox_Int4}
         For i = 0 To 3
             marTextBox_Int(i).Clear()
         Next
@@ -222,8 +233,8 @@
             Return
         End If
         If ComboBox_JumpLabel.SelectedIndex <> -1 Then
-            Dim tmpstr As String = ComboBox1.SelectedItem & "," & ComboBox_JumpLabel.SelectedItem & vbCrLf
-            TextBox_OrderList.AppendText(tmpstr)
+            Dim tmpstr As String = ComboBox1.SelectedItem & "," & ComboBox_JumpLabel.SelectedItem
+            AddOrderPack(tmpstr)
         Else
             MessageBox.Show("ジャンプ先ラベルが選択されていません")
         End If
@@ -250,9 +261,10 @@
             mDictJumpLabel.Add(TextBox_JumpLabel.Text, miLabelCounter)
             miLabelCounter = miLabelCounter + 1
         End If
-        Dim tmpstr As String = ComboBox1.SelectedItem & "," & TextBox_JumpLabel.Text & vbCrLf
+        Dim tmpstr As String = ComboBox1.SelectedItem & "," & TextBox_JumpLabel.Text
         'TextBox_OrderList.AppendText(tmpstr)
-        ListBox_OrderSet.Items.Add(tmpstr)
+        'ListBox_OrderSet.Items.Add(tmpstr)
+        AddOrderPack(tmpstr)
         ComboBox_JumpLabel.Items.Clear()
         For Each str As String In mDictJumpLabel.Keys
             ComboBox_JumpLabel.Items.Add(str)
@@ -273,7 +285,106 @@
     End Function
 
     Private Sub ListBox_OrderSet_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox_OrderSet.SelectedIndexChanged
-        MessageBox.Show(ListBox_OrderSet.SelectedItem)
+        If String.IsNullOrEmpty(ListBox_OrderSet.SelectedItem) = False Then
+            TextBox_CurrentOrder.Text = ListBox_OrderSet.SelectedItem
+            'MessageBox.Show(ListBox_OrderSet.SelectedItem)
+        End If
 
+    End Sub
+
+    Private Sub MoveCursorToLastpos()
+        ListBox_OrderSet.SelectedIndex = ListBox_OrderSet.Items.Count - 1
+    End Sub
+
+    Private Sub Button_InsertOrderSetInt_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Button_InsertOrderSetJump_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Button_InsertOrderSetLabel_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        If ListBox_OrderSet.SelectedIndex = -1 Then
+            MessageBox.Show("リストボックスの選択がされていません")
+        Else
+            ListBox_OrderSet.Items.Insert(ListBox_OrderSet.SelectedIndex, "")
+        End If
+
+    End Sub
+
+    Private Sub TabPage2_Click(sender As Object, e As EventArgs) Handles TabPage2.Click
+        ListBox_OrderSet.SelectedIndex = -1
+    End Sub
+
+    Private Sub AddOrderPack(orderstring As String)
+        If ListBox_OrderSet.SelectedIndex = -1 Then
+            ListBox_OrderSet.Items.Add(orderstring)
+            ListBox_OrderSet.ClearSelected()
+            MoveCursorToLastpos()
+        Else
+            'カーソルの下に追加する
+            If ListBox_OrderSet.SelectedIndex = ListBox_OrderSet.Items.Count - 1 Then
+                ListBox_OrderSet.Items.Add(orderstring)
+                ListBox_OrderSet.ClearSelected()
+                MoveCursorToLastpos()
+            Else
+                Dim tmpcursor As Integer = ListBox_OrderSet.SelectedIndex
+                ListBox_OrderSet.ClearSelected()
+                ListBox_OrderSet.Items.Insert(tmpcursor + 1, orderstring)
+                ListBox_OrderSet.SelectedIndex = tmpcursor + 1
+            End If
+        End If
+    End Sub
+
+    Private Sub ListBox_OrderSet_KeyDown(sender As Object, e As KeyEventArgs) Handles ListBox_OrderSet.KeyDown
+        If e.KeyCode = Keys.C Then
+            If (e.Modifiers And Keys.Control) = Keys.Control Then
+                Dim txt As String = ""
+                For Each str As String In ListBox_OrderSet.SelectedItems
+                    txt = txt & str & ";"
+                Next
+                My.Computer.Clipboard.Clear()
+                My.Computer.Clipboard.SetText(txt)
+                'MessageBox.Show(My.Computer.Clipboard.GetText())
+            End If
+        End If
+        If e.KeyCode = Keys.V Then
+            If (e.Modifiers And Keys.Control) = Keys.Control Then
+                If ListBox_OrderSet.SelectedIndex = -1 Then
+                    MessageBox.Show("リストボックス内にペーストを行うための有効なカーソルがありません")
+                    Return
+                End If
+                If ListBox_OrderSet.SelectedIndices.Count > 1 Then
+                    MessageBox.Show("単一カーソルの直下にペーストするため、選択を１つにしてください")
+                    Return
+                End If
+                Dim lines As String() = My.Computer.Clipboard.GetText().Split(";")
+                Dim sta As Stack(Of String) = New Stack(Of String)
+                For Each str As String In lines
+                    If str.Length > 0 Then
+                        sta.Push(str)
+                    End If
+                Next
+                For i = 0 To sta.Count - 1
+                    ListBox_OrderSet.Items.Insert(ListBox_OrderSet.SelectedIndex + 1, sta.Pop())
+                Next
+            End If
+        End If
+        If e.KeyCode = Keys.Delete Then
+            Dim i As Integer
+            Dim dellist As List(Of Integer) = New List(Of Integer)
+            For Each index As Integer In ListBox_OrderSet.SelectedIndices
+                dellist.Add(index)
+            Next
+            dellist.Reverse()
+            For Each index As Integer In dellist
+                ListBox_OrderSet.Items.RemoveAt(index)
+            Next
+        End If
     End Sub
 End Class
