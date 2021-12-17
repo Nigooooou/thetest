@@ -24,12 +24,11 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
-        Me.TextBox_CurrentOrder = New System.Windows.Forms.TextBox()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.ListBox_OrderSet = New System.Windows.Forms.ListBox()
-        Me.TextBox13 = New System.Windows.Forms.TextBox()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPage_Int = New System.Windows.Forms.TabPage()
         Me.Label_detail4 = New System.Windows.Forms.Label()
@@ -74,6 +73,8 @@ Partial Class Form1
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Button_SetLabelname = New System.Windows.Forms.Button()
         Me.TextBox_JumpLabel = New System.Windows.Forms.TextBox()
+        Me.TabPage_Nothing = New System.Windows.Forms.TabPage()
+        Me.Button_SetOrderPackWithoutOperand = New System.Windows.Forms.Button()
         Me.Label_CodeID = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
@@ -100,6 +101,7 @@ Partial Class Form1
         Me.GroupBox1.SuspendLayout()
         Me.TabPage_Jump.SuspendLayout()
         Me.TabPage_Label.SuspendLayout()
+        Me.TabPage_Nothing.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -117,12 +119,11 @@ Partial Class Form1
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.Label11)
+        Me.TabPage2.Controls.Add(Me.Button5)
         Me.TabPage2.Controls.Add(Me.Label10)
         Me.TabPage2.Controls.Add(Me.Button4)
-        Me.TabPage2.Controls.Add(Me.TextBox_CurrentOrder)
-        Me.TabPage2.Controls.Add(Me.Button3)
         Me.TabPage2.Controls.Add(Me.ListBox_OrderSet)
-        Me.TabPage2.Controls.Add(Me.TextBox13)
         Me.TabPage2.Controls.Add(Me.TabControl2)
         Me.TabPage2.Controls.Add(Me.Label_CodeID)
         Me.TabPage2.Controls.Add(Me.Label4)
@@ -135,6 +136,24 @@ Partial Class Form1
         Me.TabPage2.Text = "基本画面"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(898, 36)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(185, 12)
+        Me.Label11.TabIndex = 24
+        Me.Label11.Text = "コピペ、deleteキーでの行操作できます"
+        '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(874, 398)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(209, 19)
+        Me.Button5.TabIndex = 23
+        Me.Button5.Text = "ListBoxカーソル下に空命令行を挿入"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
         'Label10
         '
         Me.Label10.AutoSize = True
@@ -146,32 +165,17 @@ Partial Class Form1
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(336, 398)
+        Me.Button4.Location = New System.Drawing.Point(605, 398)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(165, 19)
+        Me.Button4.Size = New System.Drawing.Size(209, 19)
         Me.Button4.TabIndex = 21
-        Me.Button4.Text = "カーソル上に空命令行を挿入"
+        Me.Button4.Text = "ListBoxカーソル上に空命令行を挿入"
         Me.Button4.UseVisualStyleBackColor = True
-        '
-        'TextBox_CurrentOrder
-        '
-        Me.TextBox_CurrentOrder.Location = New System.Drawing.Point(507, 398)
-        Me.TextBox_CurrentOrder.Name = "TextBox_CurrentOrder"
-        Me.TextBox_CurrentOrder.ReadOnly = True
-        Me.TextBox_CurrentOrder.Size = New System.Drawing.Size(418, 19)
-        Me.TextBox_CurrentOrder.TabIndex = 20
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(932, 398)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(151, 19)
-        Me.Button3.TabIndex = 19
-        Me.Button3.Text = "リストから選択セットを削除"
-        Me.Button3.UseVisualStyleBackColor = True
         '
         'ListBox_OrderSet
         '
+        Me.ListBox_OrderSet.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.ListBox_OrderSet.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.ListBox_OrderSet.FormattingEnabled = True
         Me.ListBox_OrderSet.ItemHeight = 12
         Me.ListBox_OrderSet.Location = New System.Drawing.Point(605, 51)
@@ -181,20 +185,13 @@ Partial Class Form1
         Me.ListBox_OrderSet.Size = New System.Drawing.Size(478, 340)
         Me.ListBox_OrderSet.TabIndex = 18
         '
-        'TextBox13
-        '
-        Me.TextBox13.Location = New System.Drawing.Point(822, 26)
-        Me.TextBox13.Name = "TextBox13"
-        Me.TextBox13.ReadOnly = True
-        Me.TextBox13.Size = New System.Drawing.Size(261, 19)
-        Me.TextBox13.TabIndex = 17
-        '
         'TabControl2
         '
         Me.TabControl2.Controls.Add(Me.TabPage_Int)
         Me.TabControl2.Controls.Add(Me.TabPage_Compare)
         Me.TabControl2.Controls.Add(Me.TabPage_Jump)
         Me.TabControl2.Controls.Add(Me.TabPage_Label)
+        Me.TabControl2.Controls.Add(Me.TabPage_Nothing)
         Me.TabControl2.Location = New System.Drawing.Point(8, 76)
         Me.TabControl2.Name = "TabControl2"
         Me.TabControl2.SelectedIndex = 0
@@ -621,6 +618,25 @@ Partial Class Form1
         Me.TextBox_JumpLabel.Size = New System.Drawing.Size(218, 19)
         Me.TextBox_JumpLabel.TabIndex = 0
         '
+        'TabPage_Nothing
+        '
+        Me.TabPage_Nothing.Controls.Add(Me.Button_SetOrderPackWithoutOperand)
+        Me.TabPage_Nothing.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage_Nothing.Name = "TabPage_Nothing"
+        Me.TabPage_Nothing.Size = New System.Drawing.Size(587, 290)
+        Me.TabPage_Nothing.TabIndex = 4
+        Me.TabPage_Nothing.Text = "引数無し"
+        Me.TabPage_Nothing.UseVisualStyleBackColor = True
+        '
+        'Button_SetOrderPackWithoutOperand
+        '
+        Me.Button_SetOrderPackWithoutOperand.Location = New System.Drawing.Point(488, 238)
+        Me.Button_SetOrderPackWithoutOperand.Name = "Button_SetOrderPackWithoutOperand"
+        Me.Button_SetOrderPackWithoutOperand.Size = New System.Drawing.Size(96, 49)
+        Me.Button_SetOrderPackWithoutOperand.TabIndex = 17
+        Me.Button_SetOrderPackWithoutOperand.Text = "命令追加"
+        Me.Button_SetOrderPackWithoutOperand.UseVisualStyleBackColor = True
+        '
         'Label_CodeID
         '
         Me.Label_CodeID.AutoSize = True
@@ -798,6 +814,7 @@ Partial Class Form1
         Me.TabPage_Jump.PerformLayout()
         Me.TabPage_Label.ResumeLayout(False)
         Me.TabPage_Label.PerformLayout()
+        Me.TabPage_Nothing.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         Me.ResumeLayout(False)
@@ -855,7 +872,6 @@ Partial Class Form1
     Friend WithEvents Label17 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents TextBox_JumpLabel As TextBox
-    Friend WithEvents TextBox13 As TextBox
     Friend WithEvents Button_SetInt As Button
     Friend WithEvents Button_SetCompare As Button
     Friend WithEvents Button_SetJump As Button
@@ -867,8 +883,10 @@ Partial Class Form1
     Friend WithEvents Label_detail2 As Label
     Friend WithEvents Label_detail1 As Label
     Friend WithEvents ListBox_OrderSet As ListBox
-    Friend WithEvents Button3 As Button
-    Friend WithEvents TextBox_CurrentOrder As TextBox
     Friend WithEvents Button4 As Button
     Friend WithEvents Label10 As Label
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Label11 As Label
+    Friend WithEvents TabPage_Nothing As TabPage
+    Friend WithEvents Button_SetOrderPackWithoutOperand As Button
 End Class

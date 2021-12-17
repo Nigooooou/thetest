@@ -183,7 +183,8 @@
                         TabControl2.SelectedTab = TabPage_Jump
                     Case "L"
                         TabControl2.SelectedTab = TabPage_Label
-
+                    Case Else
+                        TabControl2.SelectedTab = TabPage_Nothing
                 End Select
             End If
         End If
@@ -286,7 +287,7 @@
 
     Private Sub ListBox_OrderSet_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox_OrderSet.SelectedIndexChanged
         If String.IsNullOrEmpty(ListBox_OrderSet.SelectedItem) = False Then
-            TextBox_CurrentOrder.Text = ListBox_OrderSet.SelectedItem
+            'TextBox_CurrentOrder.Text = ListBox_OrderSet.SelectedItem
             'MessageBox.Show(ListBox_OrderSet.SelectedItem)
         End If
 
@@ -296,25 +297,29 @@
         ListBox_OrderSet.SelectedIndex = ListBox_OrderSet.Items.Count - 1
     End Sub
 
-    Private Sub Button_InsertOrderSetInt_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Button_InsertOrderSetJump_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Button_InsertOrderSetLabel_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Function IsListboxSelectedValid() As Boolean
         If ListBox_OrderSet.SelectedIndex = -1 Then
             MessageBox.Show("リストボックスの選択がされていません")
-        Else
+            Return False
+        End If
+        Return True
+    End Function
+
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        If IsListboxSelectedValid() = True Then
             ListBox_OrderSet.Items.Insert(ListBox_OrderSet.SelectedIndex, "")
         End If
+    End Sub
 
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        If IsListboxSelectedValid() = True Then
+            If ListBox_OrderSet.SelectedIndex + 1 > ListBox_OrderSet.Items.Count - 1 Then
+                ListBox_OrderSet.Items.Insert(ListBox_OrderSet.SelectedIndex + 1, "")
+            Else
+                ListBox_OrderSet.Items.Add("")
+            End If
+        End If
     End Sub
 
     Private Sub TabPage2_Click(sender As Object, e As EventArgs) Handles TabPage2.Click
@@ -341,18 +346,35 @@
         End If
     End Sub
 
+    Private Sub CopySelectedItemsToClip()
+        Dim txt As String = ""
+        For Each str As String In ListBox_OrderSet.SelectedItems
+            txt = txt & str & ";"
+        Next
+        My.Computer.Clipboard.Clear()
+        My.Computer.Clipboard.SetText(txt)
+    End Sub
+
+    Private Sub DeleteSelectedItems()
+        Dim i As Integer
+        Dim dellist As List(Of Integer) = New List(Of Integer)
+        For Each index As Integer In ListBox_OrderSet.SelectedIndices
+            dellist.Add(index)
+        Next
+        dellist.Reverse()
+        For Each index As Integer In dellist
+            ListBox_OrderSet.Items.RemoveAt(index)
+        Next
+    End Sub
+
     Private Sub ListBox_OrderSet_KeyDown(sender As Object, e As KeyEventArgs) Handles ListBox_OrderSet.KeyDown
+        'コピーの挙動
         If e.KeyCode = Keys.C Then
             If (e.Modifiers And Keys.Control) = Keys.Control Then
-                Dim txt As String = ""
-                For Each str As String In ListBox_OrderSet.SelectedItems
-                    txt = txt & str & ";"
-                Next
-                My.Computer.Clipboard.Clear()
-                My.Computer.Clipboard.SetText(txt)
-                'MessageBox.Show(My.Computer.Clipboard.GetText())
+                CopySelectedItemsToClip()
             End If
         End If
+        'ペーストの挙動・内容チェックしてないので入れこむこと
         If e.KeyCode = Keys.V Then
             If (e.Modifiers And Keys.Control) = Keys.Control Then
                 If ListBox_OrderSet.SelectedIndex = -1 Then
@@ -375,16 +397,22 @@
                 Next
             End If
         End If
+        'deleteキーの挙動、選択行を消す
         If e.KeyCode = Keys.Delete Then
-            Dim i As Integer
-            Dim dellist As List(Of Integer) = New List(Of Integer)
-            For Each index As Integer In ListBox_OrderSet.SelectedIndices
-                dellist.Add(index)
-            Next
-            dellist.Reverse()
-            For Each index As Integer In dellist
-                ListBox_OrderSet.Items.RemoveAt(index)
-            Next
+            DeleteSelectedItems()
+        End If
+        'ctrl+xの挙動
+        If e.KeyCode = Keys.X Then
+            If (e.Modifiers And Keys.Control) = Keys.Control Then
+                CopySelectedItemsToClip()
+                DeleteSelectedItems()
+            End If
+        End If
+    End Sub
+
+    Private Sub Button_SetOrderPackWithoutOperand_Click(sender As Object, e As EventArgs) Handles Button_SetOrderPackWithoutOperand.Click
+        If ComboBox1.SelectedItem IsNot Nothing Then
+            AddOrderPack(ComboBox1.SelectedItem)
         End If
     End Sub
 End Class
