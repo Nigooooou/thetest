@@ -91,6 +91,8 @@ Partial Class Form1
         Me.TB_OutputDirectory = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Button_OutputOrderFile = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabControl2.SuspendLayout()
@@ -119,6 +121,8 @@ Partial Class Form1
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.Button6)
+        Me.TabPage2.Controls.Add(Me.Button_OutputOrderFile)
         Me.TabPage2.Controls.Add(Me.Label11)
         Me.TabPage2.Controls.Add(Me.Button5)
         Me.TabPage2.Controls.Add(Me.Label10)
@@ -157,7 +161,7 @@ Partial Class Form1
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(757, 437)
+        Me.Label10.Location = New System.Drawing.Point(757, 13)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(326, 12)
         Me.Label10.TabIndex = 22
@@ -175,7 +179,6 @@ Partial Class Form1
         'ListBox_OrderSet
         '
         Me.ListBox_OrderSet.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.ListBox_OrderSet.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.ListBox_OrderSet.FormattingEnabled = True
         Me.ListBox_OrderSet.ItemHeight = 12
         Me.ListBox_OrderSet.Location = New System.Drawing.Point(605, 51)
@@ -789,6 +792,24 @@ Partial Class Form1
         Me.TabPage3.Text = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
+        'Button_OutputOrderFile
+        '
+        Me.Button_OutputOrderFile.Location = New System.Drawing.Point(605, 431)
+        Me.Button_OutputOrderFile.Name = "Button_OutputOrderFile"
+        Me.Button_OutputOrderFile.Size = New System.Drawing.Size(209, 19)
+        Me.Button_OutputOrderFile.TabIndex = 25
+        Me.Button_OutputOrderFile.Text = "現在のListBoxの内容を書き出し"
+        Me.Button_OutputOrderFile.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(874, 431)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(209, 19)
+        Me.Button6.TabIndex = 26
+        Me.Button6.Text = "命令リストファイルを読み込み"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -889,4 +910,6 @@ Partial Class Form1
     Friend WithEvents Label11 As Label
     Friend WithEvents TabPage_Nothing As TabPage
     Friend WithEvents Button_SetOrderPackWithoutOperand As Button
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button_OutputOrderFile As Button
 End Class

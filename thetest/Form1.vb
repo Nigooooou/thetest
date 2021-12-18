@@ -1,5 +1,4 @@
 ﻿Public Class Form1
-    Dim mSettingsDict As Dictionary(Of String, Int32)
     Dim mIntLabelControls As Label()
     Dim marTextBox_Int As TextBox()
 
@@ -31,10 +30,7 @@
         End If
         ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList
         ComboBox_JumpLabel.DropDownStyle = ComboBoxStyle.DropDownList
-    End Sub
-
-    Private Sub 設定ToolStripMenuItem1_Click(sender As Object, e As EventArgs)
-
+        HideAllTab()
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
@@ -67,6 +63,8 @@
     Dim mListOriginalString As List(Of String) = New List(Of String)
     Dim mDictJumpLabel As Dictionary(Of String, Integer) = New Dictionary(Of String, Integer)
     Dim miLabelCounter As Integer = 0
+    Dim miJumpOrderID As Integer = -1
+    Dim miLabelOrderID As Integer = -1
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         ParseDefinitionFile()
     End Sub
@@ -102,18 +100,26 @@
                 MessageBox.Show(index & "要素目のフォーマットがおかしいです：要素３未満")
                 Continue Do
             End If
-            '第三要素がハイフンならばパス
+            '3番目がハイフンならばパス
             If strarray.GetValue(2) = "-" Then
                 Continue Do
             End If
-            '１番目と２番目の要素が空だと無効
+            '0番目と1番目の要素が空だと無効
             If String.IsNullOrEmpty(strarray.GetValue(0)) Or String.IsNullOrEmpty(strarray.GetValue(1)) Then
                 MessageBox.Show(index & "要素目のフォーマットがおかしいです：要素1&2が未設定")
                 Continue Do
             End If
 
-            mListOriginalString.Add(str)
+            'ジャンプコードを記憶
+            If strarray.GetValue(2) = "J" Then
+                miJumpOrderID = Integer.Parse(strarray.GetValue(0))
+            End If
+            'ラベル設定コードを記憶
+            If strarray.GetValue(2) = "L" Then
+                miLabelOrderID = Integer.Parse(strarray.GetValue(0))
+            End If
 
+            mListOriginalString.Add(str)
             TB_ML_Settings.AppendText(strarray.Length & " " & str & vbCrLf)
             index = index + 1
             ComboBox1.Items.Add(strarray(1))
@@ -140,12 +146,37 @@
         Return ""
     End Function
 
+    Private Sub HideAllTab()
+        TabControl2.TabPages.Remove(TabPage_Int)
+        TabControl2.TabPages.Remove(TabPage_Compare)
+        TabControl2.TabPages.Remove(TabPage_Jump)
+        TabControl2.TabPages.Remove(TabPage_Label)
+        TabControl2.TabPages.Remove(TabPage_Nothing)
+    End Sub
+
+    Private Sub ShowTabIndexOf(index As Integer)
+        'インサート先は全部先頭なので0、その代わりhidealltabを事前に使って全消し必須
+        Select Case index
+            Case 0
+                TabControl2.TabPages.Insert(0, TabPage_Int)
+            Case 1
+                TabControl2.TabPages.Insert(0, TabPage_Compare)
+            Case 2
+                TabControl2.TabPages.Insert(0, TabPage_Jump)
+            Case 3
+                TabControl2.TabPages.Insert(0, TabPage_Label)
+            Case 4
+                TabControl2.TabPages.Insert(0, TabPage_Nothing)
+        End Select
+    End Sub
+
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         If ComboBox1.SelectedItem IsNot Nothing Then
             mIntLabelControls = New Label() {Label_detail1, Label_detail2, Label_detail3, Label_detail4}
             Dim id As Integer = GetIDFromDescription(ComboBox1.SelectedItem)
             If id <> -1 Then
+                HideAllTab()
                 Label_CodeID.Text = "コードID:" & id
                 Dim str As String = GetStrFromDescription(ComboBox1.SelectedItem)
                 Dim strarray As String() = str.Split(",")
@@ -168,26 +199,44 @@
                     End If
                     tmplist.Add(tmpstr)
                 Next
-                'Dim opcode As Integer = Integer.Parse(tmplist(i))
                 Dim counter As Integer
                 Select Case tmplist(2)
                     Case "0"
                         TabControl2.SelectedTab = TabPage_Int
                         For counter = 0 To valuecount
-                            mIntLabelControls(counter).Text = tmplist(3 + 3 * counter)
+                            Try
+                                mIntLabelControls(counter).Text = tmplist(3 + 3 * counter)
+                            Catch ex As ArgumentOutOfRangeException
+                                MessageBox.Show("定義ファイルに引数の説明がありません")
+                                Exit For
+                            End Try
                             counter = counter + 1
                         Next
+                        ChangeIntTextboxRange(0, valuecount - 1, True)
+                        ChangeIntTextboxRange(valuecount, marTextBox_Int.Length - 1, False)
+                        ShowTabIndexOf(0)
                     Case "P"
                         TabControl2.SelectedTab = TabPage_Int
+                        ShowTabIndexOf(1)
                     Case "J"
                         TabControl2.SelectedTab = TabPage_Jump
+                        ShowTabIndexOf(2)
                     Case "L"
                         TabControl2.SelectedTab = TabPage_Label
-                    Case Else
+                        ShowTabIndexOf(3)
+                    Case Else 'シートでは無指定、オペランドなしのタブ
                         TabControl2.SelectedTab = TabPage_Nothing
+                        ShowTabIndexOf(4)
                 End Select
             End If
         End If
+    End Sub
+
+    Private Sub ChangeIntTextboxRange(start_index As Integer, end_index As Integer, flag As Boolean)
+        marTextBox_Int = New TextBox() {TextBox_Int1, TextBox_Int2, TextBox_Int3, TextBox_Int4}
+        For i = start_index To end_index
+            marTextBox_Int(i).Enabled = flag
+        Next
     End Sub
 
     Private Sub Button_SetInt_Click(sender As Object, e As EventArgs) Handles Button_SetInt.Click
@@ -199,7 +248,7 @@
 
         Dim tmpstr As String = ComboBox1.SelectedItem
         Dim i As Integer
-        For i = 0 To 3
+        For i = 0 To marTextBox_Int.Length - 1
             If mIntLabelControls(i).Text.Length > 0 And String.IsNullOrWhiteSpace(marTextBox_Int(i).Text) = True Then
                 MessageBox.Show(i + 1 & "番の入力が不足しています")
                 Return
@@ -207,9 +256,15 @@
                 '詳細のある項目だけデータとして扱う。詳細なし項目のデータは無視
                 'また、入力テキストぼっくすのテキスト長が1以上なければ無視
                 If mIntLabelControls(i).Text.Length > 0 And marTextBox_Int.Length > 0 Then
-                    tmpstr = tmpstr & "," & marTextBox_Int(i).Text
+                    If IsNumeric(marTextBox_Int(i).Text) Then
+                        tmpstr = tmpstr & "," & marTextBox_Int(i).Text
+                    Else
+                        MessageBox.Show("入力内容が数値ではありません")
+                        Return
+                    End If
                 End If
             End If
+
         Next
         AddOrderPack(tmpstr)
     End Sub
@@ -229,13 +284,41 @@
 
     End Sub
 
+    Private Function IsJumpOrder(orderstring As String) As Boolean
+        Dim strarray() As String = orderstring.Split(",")
+        If Integer.Parse(strarray.GetValue(0)) = miJumpOrderID Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    Private Function IsLabelOrder(orderstring As String) As Boolean
+        Dim strarray() As String = orderstring.Split(",")
+        If Integer.Parse(strarray.GetValue(0)) = miLabelOrderID Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    Private Function GetLabelNameByOrderPack(orderstring As String) As String
+        Dim strarray() As String = orderstring.Split(",")
+        If IsJumpOrder(orderstring) = True Then
+            Return strarray.GetValue(1)
+        End If
+        Return ""
+    End Function
+
     Private Sub Button_SetJump_Click(sender As Object, e As EventArgs) Handles Button_SetJump.Click
         If CheckOrderValidation() = False Then
             Return
         End If
         If ComboBox_JumpLabel.SelectedIndex <> -1 Then
             Dim tmpstr As String = ComboBox1.SelectedItem & "," & ComboBox_JumpLabel.SelectedItem
-            AddOrderPack(tmpstr)
+            Dim iAddr As Integer
+            If mDictJumpLabel.TryGetValue(ComboBox_JumpLabel.SelectedItem, iAddr) Then
+                tmpstr = tmpstr & "," & iAddr.ToString()
+                AddOrderPack(tmpstr)
+            End If
         Else
             MessageBox.Show("ジャンプ先ラベルが選択されていません")
         End If
@@ -414,5 +497,9 @@
         If ComboBox1.SelectedItem IsNot Nothing Then
             AddOrderPack(ComboBox1.SelectedItem)
         End If
+    End Sub
+
+    Private Sub Button_OutputOrderFile_Click(sender As Object, e As EventArgs) Handles Button_OutputOrderFile.Click
+
     End Sub
 End Class
