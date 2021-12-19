@@ -1,6 +1,7 @@
 ﻿Public Class Form1
     Dim mIntLabelControls As Label()
     Dim marTextBox_Int As TextBox()
+    Dim mDictOrderDescriptionAndID As Dictionary(Of String, Integer)
 
     Shared Sub Main()
         If Diagnostics.Process.GetProcessesByName(Diagnostics.Process.GetCurrentProcess.ProcessName).Length > 1 Then
@@ -79,6 +80,7 @@
             Return
         End If
         ComboBox1.Items.Clear()
+        mDictOrderDescriptionAndID = New Dictionary(Of String, Integer)
         Dim sr As IO.StreamReader = New IO.StreamReader(TB_CSVFilePath.Text)
         Dim str As String = ""
         Dim index As Int32 = New Int32
@@ -122,6 +124,12 @@
             mListOriginalString.Add(str)
             TB_ML_Settings.AppendText(strarray.Length & " " & str & vbCrLf)
             index = index + 1
+
+            If mDictOrderDescriptionAndID.ContainsKey(strarray(1)) = True Then
+                MessageBox.Show(strarray(1) & ":同じ命令詳細が登録されています")
+            Else
+                mDictOrderDescriptionAndID.Add(strarray(1), Integer.Parse(strarray(0)))
+            End If
             ComboBox1.Items.Add(strarray(1))
         Loop
         sr.Close()
@@ -499,7 +507,85 @@
         End If
     End Sub
 
-    Private Sub Button_OutputOrderFile_Click(sender As Object, e As EventArgs) Handles Button_OutputOrderFile.Click
 
+    Private Function RenameFileEx(oldfilename As String) As Boolean
+        Dim index As Integer
+        Dim newfilename As String
+        For index = 0 To 9999
+            newfilename = oldfilename & "." & index.ToString
+            If IO.File.Exists(newfilename) = False Then
+                Rename(oldfilename, newfilename)
+                Return True
+            End If
+        Next
+        Return False
+    End Function
+
+    Private Function GetLowLevelOrderString(str As String) As String
+        Dim strarray() As String = str.Split(",")
+        Dim i As Integer = 0
+        Dim tmpi As Integer
+        Dim result As String = ""
+        For Each tmpstr As String In strarray
+            If i = 0 Then
+                mDictOrderDescriptionAndID.TryGetValue(tmpstr, tmpi)
+                result = tmpi.ToString
+            Else
+                result = result & "," & tmpstr
+            End If
+            i = i + 1
+        Next
+        Return result
+    End Function
+
+
+    'ラベル設定命令のみはチェックしてない。
+    Private Sub Button_OutputOrderFile_Click(sender As Object, e As EventArgs) Handles Button_OutputOrderFile.Click
+        '        Dim sr As IO.StreamWriter = New IO.StreamWriter()
+        If ListBox_OrderSet.Items.Count = 0 Then
+            MessageBox.Show("ListBoxの設定項目が0です。ファイル出力には１つ以上の項目設定が必要です")
+            Return
+        End If
+        Dim sfd As SaveFileDialog = New SaveFileDialog
+        If sfd.ShowDialog() = DialogResult.OK Then
+            If System.IO.File.Exists(sfd.FileName) = True Then
+                Dim result As DialogResult = MsgBox("リネームして続行しますか？リネームは連番が使われます",
+                              MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Exclamation,
+                              "すでに存在するファイル")
+                If result = DialogResult.No Or result = DialogResult.Cancel Then
+                    Return
+                End If
+                If RenameFileEx(sfd.FileName) = True Then
+                    'ここまで抜けたら正常、何もしないで主流へと。
+                Else
+                    MessageBox.Show("旧ファイルのリネームに失敗しました")
+                    Return
+                End If
+            Else
+                '正常な流れ、何もしないで主流へ
+            End If
+            Dim parentpath As IO.DirectoryInfo = System.IO.Directory.GetParent(sfd.FileName)
+            Dim newfilefullpath As String = parentpath.ToString & "\" & IO.Path.GetFileName(sfd.FileName)
+            Dim newlabelfilefullpath As String = parentpath.ToString & "\l_" & IO.Path.GetFileName(sfd.FileName)
+            If IO.Path.HasExtension(newfilefullpath) = False Then
+                newfilefullpath = newfilefullpath & ".csv"
+                newlabelfilefullpath = newlabelfilefullpath & ".csv"
+            End If
+            '主流
+            Dim swOrders As IO.StreamWriter = New IO.StreamWriter(newfilefullpath, False, System.Text.Encoding.UTF8)
+            Dim swLabels As IO.StreamWriter = New IO.StreamWriter(newlabelfilefullpath, False, System.Text.Encoding.UTF8)
+            For Each tmpstr As String In ListBox_OrderSet.Items
+                Dim llstr As String = GetLowLevelOrderString(tmpstr)
+                If IsLabelOrder(llstr) Then
+                    'ラベルのオーダーは別ファイル出力
+                    swLabels.WriteLine(llstr & vbCrLf)
+                Else
+                    swOrders.WriteLine(llstr & vbCrLf)
+                End If
+            Next
+            swOrders.Close()
+            swLabels.Close()
+        End If
     End Sub
+
 End Class

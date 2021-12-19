@@ -24,6 +24,8 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button_OutputOrderFile = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -91,8 +93,6 @@ Partial Class Form1
         Me.TB_OutputDirectory = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.Button_OutputOrderFile = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabControl2.SuspendLayout()
@@ -139,6 +139,24 @@ Partial Class Form1
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "基本画面"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(874, 431)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(209, 19)
+        Me.Button6.TabIndex = 26
+        Me.Button6.Text = "命令リストファイルを読み込み"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button_OutputOrderFile
+        '
+        Me.Button_OutputOrderFile.Location = New System.Drawing.Point(605, 431)
+        Me.Button_OutputOrderFile.Name = "Button_OutputOrderFile"
+        Me.Button_OutputOrderFile.Size = New System.Drawing.Size(209, 19)
+        Me.Button_OutputOrderFile.TabIndex = 25
+        Me.Button_OutputOrderFile.Text = "現在のListBoxの内容を書き出し"
+        Me.Button_OutputOrderFile.UseVisualStyleBackColor = True
         '
         'Label11
         '
@@ -791,24 +809,6 @@ Partial Class Form1
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
-        '
-        'Button_OutputOrderFile
-        '
-        Me.Button_OutputOrderFile.Location = New System.Drawing.Point(605, 431)
-        Me.Button_OutputOrderFile.Name = "Button_OutputOrderFile"
-        Me.Button_OutputOrderFile.Size = New System.Drawing.Size(209, 19)
-        Me.Button_OutputOrderFile.TabIndex = 25
-        Me.Button_OutputOrderFile.Text = "現在のListBoxの内容を書き出し"
-        Me.Button_OutputOrderFile.UseVisualStyleBackColor = True
-        '
-        'Button6
-        '
-        Me.Button6.Location = New System.Drawing.Point(874, 431)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(209, 19)
-        Me.Button6.TabIndex = 26
-        Me.Button6.Text = "命令リストファイルを読み込み"
-        Me.Button6.UseVisualStyleBackColor = True
         '
         'Form1
         '
