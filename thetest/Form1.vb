@@ -2,6 +2,8 @@
     Dim mIntLabelControls As Label()
     Dim marTextBox_Int As TextBox()
     Dim mDictOrderDescriptionAndID As Dictionary(Of String, Integer)
+    Dim mDictOrderIDAndDescription As Dictionary(Of Integer, String)
+    Dim mstrLabelAddrEscapeSequence As String = "$LBaddr"
 
     Shared Sub Main()
         If Diagnostics.Process.GetProcessesByName(Diagnostics.Process.GetCurrentProcess.ProcessName).Length > 1 Then
@@ -81,6 +83,7 @@
         End If
         ComboBox1.Items.Clear()
         mDictOrderDescriptionAndID = New Dictionary(Of String, Integer)
+        mDictOrderIDAndDescription = New Dictionary(Of Integer, String)
         Dim sr As IO.StreamReader = New IO.StreamReader(TB_CSVFilePath.Text)
         Dim str As String = ""
         Dim index As Int32 = New Int32
@@ -129,6 +132,7 @@
                 MessageBox.Show(strarray(1) & ":同じ命令詳細が登録されています")
             Else
                 mDictOrderDescriptionAndID.Add(strarray(1), Integer.Parse(strarray(0)))
+                mDictOrderIDAndDescription.Add(Integer.Parse(strarray(0)), strarray(1))
             End If
             ComboBox1.Items.Add(strarray(1))
         Loop
@@ -226,15 +230,19 @@
                     Case "P"
                         TabControl2.SelectedTab = TabPage_Int
                         ShowTabIndexOf(1)
-                    Case "J"
-                        TabControl2.SelectedTab = TabPage_Jump
-                        ShowTabIndexOf(2)
-                    Case "L"
-                        TabControl2.SelectedTab = TabPage_Label
-                        ShowTabIndexOf(3)
-                    Case Else 'シートでは無指定、オペランドなしのタブ
-                        TabControl2.SelectedTab = TabPage_Nothing
-                        ShowTabIndexOf(4)
+                    Case Else
+                        '上のチェックを抜けたら３つあるフォーマット指定の一番左をみる
+                        Select Case tmplist(0)
+                            Case "J"
+                                TabControl2.SelectedTab = TabPage_Jump
+                                ShowTabIndexOf(2)
+                            Case "L"
+                                TabControl2.SelectedTab = TabPage_Label
+                                ShowTabIndexOf(3)
+                            Case Else 'シートでは無指定、オペランドなしのタブ
+                                TabControl2.SelectedTab = TabPage_Nothing
+                                ShowTabIndexOf(4)
+                        End Select
                 End Select
             End If
         End If
@@ -322,11 +330,11 @@
         End If
         If ComboBox_JumpLabel.SelectedIndex <> -1 Then
             Dim tmpstr As String = ComboBox1.SelectedItem & "," & ComboBox_JumpLabel.SelectedItem
-            Dim iAddr As Integer
-            If mDictJumpLabel.TryGetValue(ComboBox_JumpLabel.SelectedItem, iAddr) Then
-                tmpstr = tmpstr & "," & iAddr.ToString()
-                AddOrderPack(tmpstr)
-            End If
+            '            Dim iAddr As Integer
+            '            If mDictJumpLabel.TryGetValue(ComboBox_JumpLabel.SelectedItem, iAddr) Then
+            '            tmpstr = tmpstr & "," & iAddr.ToString()
+            AddOrderPack(tmpstr)
+            '        End If
         Else
             MessageBox.Show("ジャンプ先ラベルが選択されていません")
         End If
@@ -354,8 +362,7 @@
             miLabelCounter = miLabelCounter + 1
         End If
         Dim tmpstr As String = ComboBox1.SelectedItem & "," & TextBox_JumpLabel.Text
-        'TextBox_OrderList.AppendText(tmpstr)
-        'ListBox_OrderSet.Items.Add(tmpstr)
+        '           & "," & mstrLabelAddrEscapeSequence
         AddOrderPack(tmpstr)
         ComboBox_JumpLabel.Items.Clear()
         For Each str As String In mDictJumpLabel.Keys
@@ -569,23 +576,48 @@
             Dim newlabelfilefullpath As String = parentpath.ToString & "\l_" & IO.Path.GetFileName(sfd.FileName)
             If IO.Path.HasExtension(newfilefullpath) = False Then
                 newfilefullpath = newfilefullpath & ".csv"
-                newlabelfilefullpath = newlabelfilefullpath & ".csv"
+                '                newlabelfilefullpath = newlabelfilefullpath & ".csv"
             End If
             '主流
             Dim swOrders As IO.StreamWriter = New IO.StreamWriter(newfilefullpath, False, System.Text.Encoding.UTF8)
-            Dim swLabels As IO.StreamWriter = New IO.StreamWriter(newlabelfilefullpath, False, System.Text.Encoding.UTF8)
             For Each tmpstr As String In ListBox_OrderSet.Items
                 Dim llstr As String = GetLowLevelOrderString(tmpstr)
-                If IsLabelOrder(llstr) Then
-                    'ラベルのオーダーは別ファイル出力
-                    swLabels.WriteLine(llstr & vbCrLf)
-                Else
-                    swOrders.WriteLine(llstr & vbCrLf)
-                End If
+                swOrders.WriteLine(llstr)
+                'If IsLabelOrder(llstr) Then
+                'ラベルのオーダーは別ファイル出力
+                'swLabels.WriteLine(llstr)
+                'Else
+                'End If
             Next
             swOrders.Close()
-            swLabels.Close()
         End If
     End Sub
 
+    Private Sub Button_LoadOrderFile_Click(sender As Object, e As EventArgs) Handles Button_LoadOrderFile.Click
+        Dim ofd As OpenFileDialog = New OpenFileDialog()
+        If ofd.ShowDialog() = DialogResult.OK Then
+            Dim sr As IO.StreamReader = New IO.StreamReader(ofd.FileName)
+            Dim tmpstr As String
+            Dim strarray() As String
+            Dim desc As String
+            Dim outstr As String
+            Do While sr.EndOfStream = False
+                tmpstr = sr.ReadLine
+                strarray = tmpstr.Split(",")
+                If mDictOrderIDAndDescription.TryGetValue(Integer.Parse(strarray.GetValue(0)), desc) = True Then
+                    outstr = desc
+                End If
+                Dim i As Integer = 0
+                For Each tmp As String In strarray
+                    If i = 0 Then
+                    Else
+                        outstr = outstr & "," & tmp
+                    End If
+                    i = i + 1
+                Next
+                ListBox_OrderSet.Items.Add(outstr)
+            Loop
+            sr.Close()
+        End If
+    End Sub
 End Class

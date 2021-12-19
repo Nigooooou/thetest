@@ -24,7 +24,7 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button_LoadOrderFile = New System.Windows.Forms.Button()
         Me.Button_OutputOrderFile = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -121,7 +121,7 @@ Partial Class Form1
         '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.Button6)
+        Me.TabPage2.Controls.Add(Me.Button_LoadOrderFile)
         Me.TabPage2.Controls.Add(Me.Button_OutputOrderFile)
         Me.TabPage2.Controls.Add(Me.Label11)
         Me.TabPage2.Controls.Add(Me.Button5)
@@ -140,14 +140,14 @@ Partial Class Form1
         Me.TabPage2.Text = "基本画面"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
-        'Button6
+        'Button_LoadOrderFile
         '
-        Me.Button6.Location = New System.Drawing.Point(874, 431)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(209, 19)
-        Me.Button6.TabIndex = 26
-        Me.Button6.Text = "命令リストファイルを読み込み"
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.Button_LoadOrderFile.Location = New System.Drawing.Point(874, 431)
+        Me.Button_LoadOrderFile.Name = "Button_LoadOrderFile"
+        Me.Button_LoadOrderFile.Size = New System.Drawing.Size(209, 19)
+        Me.Button_LoadOrderFile.TabIndex = 26
+        Me.Button_LoadOrderFile.Text = "命令リストファイルを読み込み"
+        Me.Button_LoadOrderFile.UseVisualStyleBackColor = True
         '
         'Button_OutputOrderFile
         '
@@ -910,6 +910,6 @@ Partial Class Form1
     Friend WithEvents Label11 As Label
     Friend WithEvents TabPage_Nothing As TabPage
     Friend WithEvents Button_SetOrderPackWithoutOperand As Button
-    Friend WithEvents Button6 As Button
+    Friend WithEvents Button_LoadOrderFile As Button
     Friend WithEvents Button_OutputOrderFile As Button
 End Class
